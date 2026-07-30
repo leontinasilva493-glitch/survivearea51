@@ -3,16 +3,13 @@ import {
   BadgeDollarSign,
   Binary,
   CircleDollarSign,
-  Clock3,
   Crosshair,
   ExternalLink,
   Fingerprint,
   Map,
   RadioTower,
-  ScrollText,
   ShieldAlert,
   Siren,
-  Users,
 } from "lucide-react";
 import Link from "next/link";
 

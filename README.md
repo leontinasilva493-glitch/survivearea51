@@ -18,7 +18,7 @@
 
 ## 技术栈
 
-- Next.js 13.5.11 App Router
+- Next.js 16.2.12 App Router
 - React 18 + TypeScript
 - Tailwind CSS
 - Roblox 官方 Games、Votes 和 Gamepass API
@@ -45,6 +45,18 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.example
 ```
 
 未配置时，本地 Canonical 和 Sitemap 使用 `http://localhost:3000`。部署前必须设置真实域名。
+
+## Cloudflare Workers 发布
+
+项目使用 OpenNext 适配到 Cloudflare Workers，Worker 名称为 `survivearea51`。
+
+```bash
+npm ci
+npm run adapter:build
+npm run deploy
+```
+
+OpenNext 在 Windows 上的完整支持有限，正式打包建议使用 WSL、Linux 或 Cloudflare Workers Builds。部署前将 `NEXT_PUBLIC_SITE_URL` 设置为最终的 `workers.dev` 或 Custom Domain 地址，确保 Canonical、Sitemap 和 Open Graph URL 正确。
 
 ## 数据可靠性
 
