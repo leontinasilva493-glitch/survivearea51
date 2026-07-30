@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #061115;
+  --ink-raised: #0a1a20;
+  --panel: #0d2229;
+  --panel-2: #102a32;
+  --line: rgba(128, 238, 224, 0.18);
+  --line-strong: rgba(128, 238, 224, 0.42);
+  --cyan: #82f8e6;
+  --cyan-soft: #b6fff3;
+  --amber: #ffc96b;
+  --red: #ff756d;
+  --paper: #e7f2ef;
+  --muted: #90aaa8;
+  --radius: 0.25rem;
+  --background: 192 56% 5%;
+  --foreground: 165 29% 93%;
+  --card: 191 51% 11%;
+  --card-foreground: 165 29% 93%;
+  --popover: 191 51% 11%;
+  --popover-foreground: 165 29% 93%;
+  --primary: 171 88% 74%;
+  --primary-foreground: 192 56% 5%;
+  --secondary: 191 51% 15%;
+  --secondary-foreground: 165 29% 93%;
+  --muted-foreground: 174 14% 62%;
+  --accent: 42 100% 71%;
+  --accent-foreground: 192 56% 5%;
+  --destructive: 3 100% 73%;
+  --destructive-foreground: 192 56% 5%;
+  --border: 173 23% 26%;
+  --input: 173 23% 26%;
+  --ring: 171 88% 74%;
+}
+* {
+  box-sizing: border-box;
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--paper);
+  background:
+    radial-gradient(circle at 16% 4%, rgba(50, 139, 137, 0.16), transparent 29rem),
+    radial-gradient(circle at 84% 24%, rgba(255, 201, 107, 0.055), transparent 25rem),
+    var(--ink);
+  font-family: "Bahnschrift", "DIN Alternate", "Arial Narrow", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(130, 248, 230, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(130, 248, 230, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+::selection {
+  color: var(--ink);
+  background: var(--cyan);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+
+.site-frame {
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.65rem 0.9rem;
+  color: var(--ink);
+  background: var(--cyan);
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.display-font {
+  font-family: "Bahnschrift SemiCondensed", "DIN Condensed", "Arial Narrow", sans-serif;
+  font-stretch: condensed;
+  letter-spacing: -0.035em;
+}
+
+.mono {
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.02em;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 5rem;
+}
+
+.section-space {
+  margin-top: clamp(4rem, 8vw, 7rem);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 0.8rem;
+  color: var(--cyan);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 1.8rem;
+  height: 1px;
+  content: "";
+  background: currentColor;
+}
+
+.section-title {
+  max-width: 850px;
+  margin: 0;
+  color: var(--paper);
+  font-family: "Bahnschrift SemiCondensed", "Arial Narrow", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.section-lede {
+  max-width: 720px;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.terminal-panel {
+  position: relative;
+  background: linear-gradient(145deg, rgba(16, 42, 50, 0.94), rgba(8, 24, 30, 0.94));
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+
+.terminal-panel::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  content: "";
+  border-left: 1px solid var(--line-strong);
+  transform: rotate(-45deg) translate(-6px, 3px);
+}
+
+.terminal-grid {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.terminal-grid > * {
+  background: var(--ink-raised);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--cyan);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--cyan-soft);
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.72rem 1.05rem;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.button-primary {
+  color: var(--ink);
+  background: var(--cyan);
+  border: 1px solid var(--cyan);
+}
+
+.button-secondary {
+  color: var(--paper);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--line-strong);
+}
+
+.button-primary:hover,
+.button-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.button-secondary:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 1.25rem, 1180px);
+    padding-top: 1.25rem;
+  }
+
+  .section-space {
+    margin-top: 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

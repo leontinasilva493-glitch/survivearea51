@@ -1,0 +1,22 @@
+# Survive Verity in Area 51 Field Guide
+
+This fan-made guide uses Roblox Universe ID 10455462279 and Place ID 74716719697996 as stable identifiers across game-title changes.
+
+## Evidence policy
+
+- Official game metrics and Gamepass records come from Roblox endpoints.
+- Every changing fact shows a source state and explicit verification date.
+- Official facts, official announcements, gameplay tests, community reports, unverified claims, and outdated claims are visually distinct.
+- Missing weapon stats, coin routes, map points, and codes are never filled with guesses.
+
+## Current publication status
+
+- Homepage: indexable dashboard.
+- Gamepasses: indexable official price catalog; worth-it rankings await gameplay tests.
+- Updates: indexable universe-level tracker; the current title announces Cruelty soon.
+- Codes: indexable status page; no working redemption system or active code has been verified by this guide as of 2026-07-30.
+- Weapons: noindex until at least six evidence-complete weapons exist.
+- Coins and Rebirth: noindex until controlled timed runs exist.
+- Map: noindex until a real base image and at least eight verified points exist.
+
+This site is not affiliated with Roblox Corporation, Mochi Productions!, or the creators of Verity.

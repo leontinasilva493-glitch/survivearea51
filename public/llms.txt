@@ -1,0 +1,12 @@
+# Verity Field Guide
+
+An independent, evidence-first guide for the Roblox experience Survive Verity in Area 51.
+
+## Indexable field files
+
+- / — live official game snapshot and guide dashboard
+- /gamepasses/ — official Gamepass names and prices; editorial verdicts are separately labeled
+- /updates/ — official title and update-status tracker
+- /codes/ — verified code-system and active-code status
+
+Weapons, coins, and map pages remain noindex until gameplay evidence thresholds are met.
