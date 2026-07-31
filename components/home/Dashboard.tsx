@@ -19,6 +19,7 @@ import {
   SourceBadge,
   VerificationStatus,
 } from "@/components/site/TrustUI";
+import { siteConfig } from "@/config/site";
 import {
   ROBLOX_GAME_URL,
   ratingPercent,
@@ -89,7 +90,7 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
     "@type": "WebSite",
     name: "Verity Field Guide",
     description: "An independent evidence-first guide for Survive Verity in Area 51 on Roblox.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    url: siteConfig.url,
   };
 
   return (

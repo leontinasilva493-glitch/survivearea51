@@ -109,7 +109,7 @@ npm run dev -- -p 3101
 
 | 变量 | 是否必需 | 用途 |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | 生产环境必需 | Canonical、Sitemap、Open Graph 和结构化数据的站点根地址 |
+| `NEXT_PUBLIC_SITE_URL` | 生产环境建议配置 | Canonical、Sitemap、Open Graph 和结构化数据的站点根地址；生产环境漏配时安全回退到正式域名 |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | 否 | 站点联系邮箱；未配置时不展示 |
 
 本地 `.env.local` 示例：
@@ -132,6 +132,8 @@ NEXT_PUBLIC_SITE_URL=https://survivearea51.site
 ```
 
 修改该变量后需要重新构建部署，已有 HTML 中的 Canonical 不会自动更新。
+生产构建即使误删该变量，也会回退到 `https://survivearea51.site`，不会发布
+`localhost` Canonical；但仍建议保留 Cloudflare 构建变量，便于明确管理部署配置。
 
 ## 常用命令
 

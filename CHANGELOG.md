@@ -14,6 +14,9 @@
 
 ### 修复
 
+- 生产构建缺少 `NEXT_PUBLIC_SITE_URL` 时不再回退到 `localhost`，而是安全回退到
+  `https://survivearea51.site`；本地开发仍使用 `http://localhost:3000`。
+- 首页 WebSite 结构化数据统一复用站点 URL 配置，并增加生产 URL 回归测试。
 - 启用 Next.js `trailingSlash`，使实际路由与 Canonical、Sitemap 和内部链接一致。
 - 为所有页面增加 `X-Frame-Options`、`X-Content-Type-Options`、
   `Referrer-Policy` 和 `Permissions-Policy` 基础安全响应头。
