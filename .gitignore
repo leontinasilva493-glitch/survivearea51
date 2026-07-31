@@ -43,3 +43,6 @@ public/robots.txt
 
 # local visual test output
 /tests/artifacts/
+
+# legacy template game bundle (not part of this guide)
+/public/game/crazycattle3d/
