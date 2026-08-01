@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Weapons, Map & Gamepass Guide",
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  keywords: [...siteConfig.metadata.keywords],
   openGraph: {
     title: "Survive Verity in Area 51 Weapons, Map & Gamepass Guide",
     description: siteConfig.description,

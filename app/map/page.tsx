@@ -8,7 +8,15 @@ import { FIELD_GUIDE_VERIFIED_AT, fieldSources, mapPoints } from "@/data/field-g
 export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Map Lite: 5 Key Locations",
   description: "A source-backed five-point video route covering spawn, the Normal Gun Shop, facility gate, central combat room, and a provisional Backrooms route.",
+  keywords: [
+    "Survive Verity in Area 51 map locations",
+    "Survive Verity in Area 51 item locations",
+    "Survive Verity in Area 51 spawn locations",
+    "Survive Verity in Area 51 safe routes",
+  ],
   alternates: { canonical: "/map/" },
+  openGraph: { title: "Survive Verity in Area 51 Map Lite: 5 Key Locations", description: "A source-backed five-point route covering spawn, the gun shop, facility gate, central combat room, and a provisional Backrooms route.", url: "/map/", type: "article" },
+  twitter: { card: "summary_large_image", title: "Survive Verity in Area 51 Map Lite: 5 Key Locations", description: "A source-backed five-point route covering spawn, the gun shop, facility gate, central combat room, and a provisional Backrooms route." },
   robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
 };
 

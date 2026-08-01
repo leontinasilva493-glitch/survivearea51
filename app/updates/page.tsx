@@ -9,8 +9,15 @@ import { loadRobloxDashboard } from "@/lib/roblox";
 export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Updates: Cruelty, Falsity & Patch Tracker",
   description: "Track confirmed, announced, unverified, and expired Survive Verity in Area 51 changes without treating Roblox title variants as separate games.",
+  keywords: [
+    "Survive Verity in Area 51 updates",
+    "Survive Verity in Area 51 Cruelty update",
+    "Survive Verity in Area 51 Falsity update",
+    "Survive Verity in Area 51 patch notes",
+  ],
   alternates: { canonical: "/updates/" },
   openGraph: { title: "Survive Verity in Area 51 Update Tracker", description: "Cruelty, Falsity, and patch signals separated by verification status.", url: "/updates/", type: "article" },
+  twitter: { card: "summary_large_image", title: "Survive Verity in Area 51 Update Tracker", description: "Cruelty, Falsity, and patch signals separated by verification status." },
 };
 
 function fullDate(value: string) {

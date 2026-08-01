@@ -9,7 +9,15 @@ import { loadRobloxDashboard } from "@/lib/roblox";
 export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Coins: Two Timed Run Observations",
   description: "Two timestamped coin-run observations with elapsed time, net coins, and disclosed event, quest, multiplayer, and loadout variables.",
+  keywords: [
+    "Survive Verity in Area 51 coins fast",
+    "Survive Verity in Area 51 rebirth",
+    "Survive Verity in Area 51 coin farming",
+    "Survive Verity in Area 51 x2 Coins",
+  ],
   alternates: { canonical: "/coins-rebirth/" },
+  openGraph: { title: "Survive Verity in Area 51 Coin Run Observations", description: "Two timestamped coin runs with disclosed event, quest, multiplayer, and loadout variables.", url: "/coins-rebirth/", type: "article" },
+  twitter: { card: "summary_large_image", title: "Survive Verity in Area 51 Coin Run Observations", description: "Two timestamped coin runs with disclosed event, quest, multiplayer, and loadout variables." },
   robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
 };
 

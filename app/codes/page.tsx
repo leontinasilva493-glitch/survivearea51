@@ -9,8 +9,15 @@ import { FIELD_GUIDE_VERIFIED_AT, fieldSources } from "@/data/field-guides";
 export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Codes: Is There a Redeem Button?",
   description: "A dated visible-interface audit for Survive Verity in Area 51 codes, with official and current gameplay sources and no guessed code strings.",
+  keywords: [
+    "Survive Verity in Area 51 codes",
+    "Survive Verity in Area 51 active codes",
+    "Survive Verity in Area 51 redemption system",
+    "Survive Verity in Area 51 expired codes",
+  ],
   alternates: { canonical: "/codes/" },
   openGraph: { title: "Are There Any Survive Verity in Area 51 Codes?", description: "A current gameplay-interface audit with no guessed code strings.", url: "/codes/", type: "article" },
+  twitter: { card: "summary_large_image", title: "Are There Any Survive Verity in Area 51 Codes?", description: "A current gameplay-interface audit with no guessed code strings." },
 };
 
 const auditSources = [

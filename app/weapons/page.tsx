@@ -9,13 +9,15 @@ import { FIELD_GUIDE_VERIFIED_AT, fieldSources, weaponRecords } from "@/data/fie
 export const metadata: Metadata = {
   title: "Free Weapons in Survive Verity in Area 51: Prices & Damage Feel",
   description: "Six named free-to-play weapons, shop prices, unlock method, and source-backed damage feel for MP7, SG, and AKM in Survive Verity in Area 51.",
+  keywords: [
+    "Survive Verity in Area 51 weapon stats",
+    "Survive Verity in Area 51 best weapons",
+    "Survive Verity in Area 51 weapon locations",
+    "Survive Verity in Area 51 weapon prices",
+  ],
   alternates: { canonical: "/weapons/" },
-  openGraph: {
-    title: "Survive Verity in Area 51 Free Weapons Guide",
-    description: "Three gameplay-tested weapons plus three clearly labelled testing records.",
-    url: "/weapons/",
-    type: "article",
-  },
+  openGraph: { title: "Survive Verity in Area 51 Free Weapons Guide", description: "Three gameplay-tested weapons plus three clearly labelled testing records.", url: "/weapons/", type: "article" },
+  twitter: { card: "summary_large_image", title: "Survive Verity in Area 51 Free Weapons Guide", description: "Three gameplay-tested weapons plus three clearly labelled testing records." },
 };
 
 export default function WeaponsPage() {

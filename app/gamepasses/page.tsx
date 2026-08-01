@@ -9,8 +9,15 @@ import { loadRobloxDashboard, officialGamepassUrl, type RobloxGamepass } from "@
 export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Gamepasses: Prices & Worth It?",
   description: "Compare official Survive Verity in Area 51 Gamepass names and Robux prices, with evidence status and honest worth-it verdicts.",
+  keywords: [
+    "Survive Verity in Area 51 gamepass prices",
+    "Survive Verity in Area 51 gamepasses",
+    "Survive Verity in Area 51 worth it",
+    "Survive Verity in Area 51 Robux",
+  ],
   alternates: { canonical: "/gamepasses/" },
   openGraph: { title: "Survive Verity in Area 51 Gamepasses: Prices & Worth It?", description: "Official Gamepass prices separated from gameplay verdicts.", url: "/gamepasses/", type: "article" },
+  twitter: { card: "summary_large_image", title: "Survive Verity in Area 51 Gamepasses: Prices & Worth It?", description: "Official Gamepass prices separated from gameplay verdicts." },
 };
 
 function categoryFor(pass: RobloxGamepass) {
