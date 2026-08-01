@@ -108,8 +108,11 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
       <section className="relative grid items-center overflow-hidden border-b border-[var(--line)] py-10 lg:grid-cols-[1.25fr_.75fr] lg:gap-12 lg:py-14">
         <div className="relative z-10">
           <p className="eyebrow">Verified player dashboard / Universe 10455462279</p>
-          <h1 className="display-font m-0 max-w-[920px] text-[clamp(3rem,5.7vw,5.2rem)] font-bold leading-[0.9] tracking-[-0.055em] text-[var(--paper)]">
-            Survive Verity in Area 51 <span className="mr-[0.08em] text-[var(--cyan)]">Guide:</span>Weapons, Map, Coins &amp; Gamepasses
+          <h1
+            aria-label="Survive Verity in Area 51 Guide: Weapons, Map, Coins & Gamepasses"
+            className="display-font m-0 max-w-[920px] text-[clamp(3rem,5.7vw,5.2rem)] font-bold leading-[0.9] tracking-[-0.055em] text-[var(--paper)]"
+          >
+            Survive Verity in Area 51 <span className="text-[var(--cyan)]">Guide: </span>Weapons, Map, Coins &amp; Gamepasses
           </h1>
           <p className="mt-5 max-w-2xl text-base text-[var(--muted)] sm:text-lg">
             Find verified weapons, map locations, coin routes, Gamepass prices and current update status—without fake codes or made-up stats.

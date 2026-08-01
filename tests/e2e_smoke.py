@@ -1,10 +1,11 @@
+import os
 from pathlib import Path
 
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
 
-BASE_URL = "http://localhost:3101"
+BASE_URL = os.environ.get("BASE_URL", "http://localhost:3101")
 ARTIFACTS = Path(__file__).parent / "artifacts"
 ARTIFACTS.mkdir(exist_ok=True)
 
@@ -12,6 +13,11 @@ PAGES = {
     "/": (
         "Survive Verity in Area 51 Weapons, Map & Gamepass Guide",
         "Survive Verity in Area 51 Guide: Weapons, Map, Coins & Gamepasses",
+        True,
+    ),
+    "/beginner-guide/": (
+        "Survive Verity in Area 51 Beginner Guide: First Run",
+        "Survive Verity in Area 51 Beginner Guide",
         True,
     ),
     "/gamepasses/": (
@@ -25,23 +31,23 @@ PAGES = {
         True,
     ),
     "/codes/": (
-        "Survive Verity in Area 51 Codes: Active Codes & Current Status",
+        "Survive Verity in Area 51 Codes: Is There a Redeem Button?",
         "Are There Any Survive Verity in Area 51 Codes?",
         True,
     ),
     "/weapons/": (
-        "Best Weapons in Survive Verity in Area 51: Stats & Locations",
-        "Survive Verity in Area 51 Weapons Guide",
-        False,
+        "Free Weapons in Survive Verity in Area 51: Prices & Damage Feel",
+        "Free Weapons in Survive Verity in Area 51",
+        True,
     ),
     "/coins-rebirth/": (
-        "How to Get Coins Fast in Survive Verity in Area 51",
-        "Survive Verity in Area 51 Coins & Rebirth Guide",
+        "Survive Verity in Area 51 Coins: Two Timed Run Observations",
+        "How Fast Can You Earn Coins?",
         False,
     ),
     "/map/": (
-        "Survive Verity in Area 51 Map: Spawns, Items & Safe Routes",
-        "Survive Verity in Area 51 Map and Location Guide",
+        "Survive Verity in Area 51 Map Lite: 5 Key Locations",
+        "Survive Verity in Area 51 Map Lite",
         False,
     ),
 }
@@ -73,7 +79,8 @@ with sync_playwright() as playwright:
         assert page.title() == expected_title, (path, page.title())
         headings = page.locator("h1")
         assert headings.count() == 1, (path, headings.count())
-        assert headings.first.inner_text().strip() == expected_h1, (path, headings.first.inner_text())
+        accessible_h1 = headings.first.get_attribute("aria-label") or headings.first.inner_text().strip()
+        assert accessible_h1 == expected_h1, (path, accessible_h1)
         robots = page.locator('meta[name="robots"]').get_attribute("content") or ""
         if indexable:
             assert "noindex" not in robots.lower(), (path, robots)
@@ -104,9 +111,9 @@ with sync_playwright() as playwright:
     sitemap = page.request.get(f"{BASE_URL}/sitemap.xml")
     assert sitemap.status == 200
     sitemap_text = sitemap.text()
-    for path in ("/gamepasses/", "/updates/", "/codes/"):
+    for path in ("/beginner-guide/", "/weapons/", "/gamepasses/", "/updates/", "/codes/"):
         assert path in sitemap_text
-    for path in ("/weapons/", "/coins-rebirth/", "/map/"):
+    for path in ("/coins-rebirth/", "/map/"):
         assert path not in sitemap_text
 
     robots = page.request.get(f"{BASE_URL}/robots.txt")
