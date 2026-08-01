@@ -75,6 +75,17 @@ export default function MapPage() {
         </div>
       </section>
 
+      <section className="section-space" aria-labelledby="indexing-gate">
+        <p className="eyebrow">Evidence ledger</p>
+        <h2 className="section-title" id="indexing-gate">Indexing release gate</h2>
+        <p className="mt-4 max-w-3xl text-[var(--muted)]">Map Lite stays available to players and crawlable through internal links, but it remains noindex until a current-version base image or at least eight verified landmarks support a spatially accurate guide.</p>
+        <div className="mt-7 grid gap-3 md:grid-cols-3">
+          <div className="terminal-panel p-5"><p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Current evidence</p><p className="display-font mb-2 mt-5 text-3xl font-bold text-[var(--cyan)]">4 / 8 verified landmarks</p><p className="m-0 text-sm text-[var(--muted)]">Spawn, gun shop, facility gate, and central room are timestamped observations.</p></div>
+          <div className="terminal-panel p-5"><p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Required capture</p><p className="display-font mb-2 mt-5 text-3xl font-bold text-[var(--amber)]">Exact Backrooms doorway</p><p className="m-0 text-sm text-[var(--muted)]">The lower truss corridor is a lead, not a verified entrance.</p></div>
+          <div className="terminal-panel p-5"><p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Required asset</p><p className="display-font mb-2 mt-5 text-3xl font-bold text-[var(--amber)]">Annotated base image</p><p className="m-0 text-sm text-[var(--muted)]">One current-build overview must show how the verified landmarks relate.</p></div>
+        </div>
+      </section>
+
       <section className="section-space grid gap-4 md:grid-cols-2">
         <div className="terminal-panel p-6"><CheckCircle2 className="h-5 w-5 text-[var(--cyan)]" /><h2 className="display-font mb-2 mt-8 text-2xl font-bold">Safe-zone finding</h2><p className="m-0 text-sm text-[var(--muted)]">The spawn lobby behaves as the observed staging and return area in the reviewed runs. “Safe” here does not yet mean invulnerability-tested.</p></div>
         <div className="terminal-panel p-6"><Camera className="h-5 w-5 text-[var(--amber)]" /><h2 className="display-font mb-2 mt-8 text-2xl font-bold">Next capture needed</h2><p className="m-0 text-sm text-[var(--muted)]">Record the labelled Backrooms threshold and one overhead or wide shot that can carry five spatially accurate markers.</p></div>

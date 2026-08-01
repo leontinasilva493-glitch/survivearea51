@@ -36,6 +36,9 @@ test("map lite renders five route anchors and labels the Backrooms lead as provi
   }
   assert.match(html, /youtube-nocookie\.com\/embed\/O2o-2k-66w0/);
   assert.match(html, /NOINDEX ACTIVE/);
+  assert.match(html, /Indexing release gate/);
+  assert.match(html, /4 \/ 8 verified landmarks/);
+  assert.match(html, /Exact Backrooms doorway/);
 });
 
 test("coins guide publishes two observed loops without calling either a baseline", async () => {

@@ -25,6 +25,7 @@ import {
   ratingPercent,
   type RobloxDashboardData,
 } from "@/lib/roblox";
+import { readUpdateSignal } from "@/lib/update-signal";
 
 const guideCards = [
   { title: "Compare Weapons", copy: "See which weapon facts still need gameplay proof before you spend coins or Robux.", href: "/weapons/", code: "ARM-01", icon: Crosshair },
@@ -35,7 +36,7 @@ const guideCards = [
   { title: "Check Codes", copy: "Confirm whether a redemption system exists before trusting copied code lists.", href: "/codes/", code: "KEY-06", icon: Binary },
 ] as const;
 
-const faq = [
+const baseFaq = [
   {
     question: "Is Survive Verity in Area 51 a new Roblox game?",
     answer: "Yes. The official Roblox games endpoint lists this Universe as created on July 6, 2026. That confirms the Roblox experience is new; it does not mean the broader Area 51 survival format is new.",
@@ -56,10 +57,6 @@ const faq = [
     question: "How do I enter the Backrooms?",
     answer: "The official game description confirms that the Backrooms are part of the experience, but this guide has not verified a precise entrance route. We will not publish a guessed location.",
   },
-  {
-    question: "Are Falsity and Cruelty already in the game?",
-    answer: "The current official Roblox title says CRUELTY SOON, which is an announcement rather than proof that Cruelty is live. Cached Falsity and Cruelty title variants refer to the same Universe ID, not separate Roblox games. Gameplay presence remains unverified here.",
-  },
 ] as const;
 
 function formatNumber(value: number) {
@@ -71,6 +68,14 @@ function formatDateTime(value: string) {
 }
 
 export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
+  const updateSignal = readUpdateSignal(dashboard.game.name);
+  const faq = [
+    ...baseFaq,
+    {
+      question: "Are Falsity and Cruelty already in the game?",
+      answer: `${updateSignal.description} Cached Falsity and Cruelty title variants refer to the same Universe ID, not separate Roblox games. Gameplay presence remains unverified here.`,
+    },
+  ];
   const rating = ratingPercent(dashboard.votes.upVotes, dashboard.votes.downVotes);
   const sortedPasses = [...dashboard.gamepasses].filter((pass) => pass.price !== null).sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
   const mostExpensive = sortedPasses.at(-1);
@@ -140,7 +145,7 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
           <div>
             <div className="mb-4 flex flex-wrap gap-2"><VerificationStatus status="official-announcement" /><span className="mono border border-[var(--line)] px-2 py-1 text-[10px] uppercase text-[var(--muted)]">Universe {dashboard.game.id}</span></div>
             <p className="display-font m-0 text-2xl font-bold tracking-tight sm:text-3xl">{dashboard.game.name}</p>
-            <p className="mt-2 max-w-3xl text-[var(--muted)]">The live title currently announces “Cruelty soon.” That is not the same as a verified live boss encounter.</p>
+            <p className="mt-2 max-w-3xl text-[var(--muted)]">{updateSignal.description}</p>
           </div>
           <div className="border-l-0 border-[var(--line)] md:border-l md:pl-8">
             <p className="mono m-0 text-[10px] uppercase tracking-[.12em] text-[var(--muted)]">Official record updated</p>
@@ -182,8 +187,8 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
       <section className="section-space grid gap-4 lg:grid-cols-[1.12fr_.88fr]" aria-labelledby="update-heading">
         <div className="terminal-panel p-6 sm:p-8">
           <div className="flex items-center justify-between gap-3"><p className="eyebrow !mb-0">Latest update</p><Siren className="h-5 w-5 text-[var(--amber)]" aria-hidden="true" /></div>
-          <h2 className="display-font mt-8 text-4xl font-bold tracking-tight" id="update-heading">Cruelty is announced—not confirmed live.</h2>
-          <p className="text-[var(--muted)]">The current official Roblox title contains “[CRUELTY SOON].” We record this as an official announcement until gameplay or the official page confirms release.</p>
+          <h2 className="display-font mt-8 text-4xl font-bold tracking-tight" id="update-heading">{updateSignal.heading}</h2>
+          <p className="text-[var(--muted)]">{updateSignal.description}</p>
           <div className="mt-6 flex flex-wrap items-center gap-3"><VerificationStatus status="official-announcement" /><LastVerified date={dashboard.capturedAt} /></div>
           <Link className="text-link mt-7" href="/updates/">Open the update tracker <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>

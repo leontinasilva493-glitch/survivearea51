@@ -5,6 +5,7 @@ import { PageShell, RelatedLinks } from "@/components/site/PageShell";
 import { ArticleStructuredData } from "@/components/site/StructuredData";
 import { LastVerified, SourceBadge, VerificationStatus } from "@/components/site/TrustUI";
 import { loadRobloxDashboard } from "@/lib/roblox";
+import { readUpdateSignal } from "@/lib/update-signal";
 
 export const metadata: Metadata = {
   title: "Survive Verity in Area 51 Updates: Cruelty, Falsity & Patch Tracker",
@@ -25,6 +26,7 @@ function fullDate(value: string) {
 }
 export default async function UpdatesPage() {
   const data = await loadRobloxDashboard();
+  const updateSignal = readUpdateSignal(data.game.name);
   return (
     <PageShell label="Updates" title="Survive Verity in Area 51 Update Tracker" intro="A universe-level tracker for official title signals, confirmed page content, and claims that still need gameplay proof.">
       <ArticleStructuredData path="/updates/" title="Survive Verity in Area 51 Update Tracker" description="Official update timestamps and verification states for Cruelty, Falsity, and game changes." dateModified={data.capturedAt} />
@@ -34,14 +36,14 @@ export default async function UpdatesPage() {
         <div className="flex flex-wrap items-center justify-between gap-4"><VerificationStatus status="official-announcement" /><RadioTower className="h-6 w-6 text-[var(--amber)]" aria-hidden="true" /></div>
         <p className="mono mt-8 text-[10px] uppercase tracking-[.12em] text-[var(--muted)]">Current official Roblox title</p>
         <h2 className="display-font mt-2 text-3xl font-bold tracking-tight sm:text-5xl" id="current-signal">{data.game.name}</h2>
-        <p className="max-w-3xl text-[var(--muted)]">“CRUELTY SOON” is currently visible in the official title. The word “soon” makes this an announcement, not confirmation that Cruelty is already playable.</p>
+        <p className="max-w-3xl text-[var(--muted)]">{updateSignal.description}</p>
         <p className="mono mt-6 text-xs text-[var(--cyan)]">Official record updated: {fullDate(data.game.updated)}</p>
       </section>
 
       <section className="section-space" aria-labelledby="timeline-heading">
         <p className="eyebrow">Verification timeline</p><h2 className="section-title" id="timeline-heading">What changed—and what that proves</h2>
         <ol className="mt-8 border-l border-[var(--line-strong)] pl-0">
-          <li className="relative ml-6 list-none pb-10"><span className="absolute -left-[31px] top-1 grid h-3 w-3 place-items-center bg-[var(--amber)]" /><div className="flex flex-wrap items-center gap-3"><VerificationStatus status="official-announcement" /><time className="mono text-[10px] uppercase text-[var(--muted)]" dateTime={data.game.updated}>{fullDate(data.game.updated)}</time></div><h3 className="display-font mb-2 mt-4 text-2xl font-bold">Cruelty marked “soon” in the official title</h3><p className="m-0 max-w-3xl text-[var(--muted)]">This verifies the announcement text only. Boss availability, spawn conditions, attacks, and rewards remain unverified.</p></li>
+          <li className="relative ml-6 list-none pb-10"><span className="absolute -left-[31px] top-1 grid h-3 w-3 place-items-center bg-[var(--amber)]" /><div className="flex flex-wrap items-center gap-3"><VerificationStatus status="official-announcement" /><time className="mono text-[10px] uppercase text-[var(--muted)]" dateTime={data.game.updated}>{fullDate(data.game.updated)}</time></div><h3 className="display-font mb-2 mt-4 text-2xl font-bold">{updateSignal.heading}</h3><p className="m-0 max-w-3xl text-[var(--muted)]">{updateSignal.description}</p></li>
           <li className="relative ml-6 list-none pb-10"><span className="absolute -left-[31px] top-1 h-3 w-3 bg-[var(--cyan)]" /><div className="flex flex-wrap items-center gap-3"><VerificationStatus status="confirmed" /><time className="mono text-[10px] uppercase text-[var(--muted)]" dateTime={data.game.created}>{fullDate(data.game.created)}</time></div><h3 className="display-font mb-2 mt-4 text-2xl font-bold">Roblox universe created</h3><p className="m-0 max-w-3xl text-[var(--muted)]">Universe {data.game.id} and place {data.game.rootPlaceId} identify this game across display-title changes.</p></li>
         </ol>
       </section>
