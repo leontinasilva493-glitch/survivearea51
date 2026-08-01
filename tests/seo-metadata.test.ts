@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { metadata as beginnerMetadata } from "../app/beginner-guide/page";
 import { metadata as codesMetadata } from "../app/codes/page";
 import { metadata as coinsMetadata } from "../app/coins-rebirth/page";
 import { metadata as gamepassesMetadata } from "../app/gamepasses/page";
@@ -21,6 +22,11 @@ const pages = [
     route: "/",
     metadata: homeMetadata,
     keyword: "Survive Verity in Area 51 guide",
+  },
+  {
+    route: "/beginner-guide/",
+    metadata: beginnerMetadata,
+    keyword: "Survive Verity in Area 51 beginner guide",
   },
   {
     route: "/gamepasses/",
@@ -85,6 +91,11 @@ test("sitemap publishes only canonical indexable URLs without guessed modificati
     sitemap(),
     [
       { url: "http://localhost:3000/", changeFrequency: "daily", priority: 1 },
+      {
+        url: "http://localhost:3000/beginner-guide/",
+        changeFrequency: "daily",
+        priority: 0.95,
+      },
       {
         url: "http://localhost:3000/weapons/",
         changeFrequency: "daily",

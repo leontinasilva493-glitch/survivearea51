@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ROBLOX_GAME_URL } from "@/lib/roblox";
 
 const links = [
+  ["Beginner guide", "/beginner-guide/"],
   ["Gamepasses", "/gamepasses/"],
   ["Updates", "/updates/"],
   ["Codes", "/codes/"],

@@ -105,7 +105,7 @@ export default function WeaponsPage() {
         </div>
       </section>
 
-      <RelatedLinks links={[["Coins & Rebirth", "/coins-rebirth/", "Put the tested loadouts in their observed coin-run context."], ["Map Lite", "/map/", "Follow the five-point video route board."], ["Codes status", "/codes/", "Check the visible redemption-interface audit."]]} />
+      <RelatedLinks links={[["Beginner guide", "/beginner-guide/", "Turn the documented MP7 purchase into a first-run route."], ["Coins & Rebirth", "/coins-rebirth/", "Put the tested loadouts in their observed coin-run context."], ["Map Lite", "/map/", "Follow the five-point video route board."]]} />
     </PageShell>
   );
 }

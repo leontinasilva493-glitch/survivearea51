@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ROBLOX_GAME_URL } from "@/lib/roblox";
 
 const navigation = [
+  ["Start", "/beginner-guide/"],
   ["Weapons", "/weapons/"],
   ["Gamepasses", "/gamepasses/"],
   ["Coins", "/coins-rebirth/"],

@@ -3,6 +3,7 @@ import {
   BadgeDollarSign,
   Binary,
   CircleDollarSign,
+  Compass,
   Crosshair,
   ExternalLink,
   Fingerprint,
@@ -28,6 +29,7 @@ import {
 import { readUpdateSignal } from "@/lib/update-signal";
 
 const guideCards = [
+  { title: "Start Your First Run", copy: "Follow four observed checkpoints from spawn to the first documented combat loop.", href: "/beginner-guide/", code: "RUN-00", icon: Compass },
   { title: "Compare Weapons", copy: "See which weapon facts still need gameplay proof before you spend coins or Robux.", href: "/weapons/", code: "ARM-01", icon: Crosshair },
   { title: "Check Gamepasses", copy: "Compare all official prices and separate Roblox facts from our pending verdicts.", href: "/gamepasses/", code: "PAY-02", icon: BadgeDollarSign },
   { title: "Farm Coins Faster", copy: "Track tested runs and rebirth evidence without invented fastest-route claims.", href: "/coins-rebirth/", code: "ECO-03", icon: CircleDollarSign },
@@ -113,7 +115,7 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
             Find verified weapons, map locations, coin routes, Gamepass prices and current update status—without fake codes or made-up stats.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link className="button-primary" href="/weapons/">View weapons <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+            <Link className="button-primary" href="/beginner-guide/">Start your first run <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
             <a className="button-secondary" href={ROBLOX_GAME_URL} rel="noopener noreferrer" target="_blank">Play on Roblox <ExternalLink className="h-4 w-4" aria-hidden="true" /></a>
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
