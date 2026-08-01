@@ -98,27 +98,27 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
       <script dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} type="application/ld+json" />
       <script dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} type="application/ld+json" />
 
-      <section className="relative grid min-h-[670px] items-center overflow-hidden border-b border-[var(--line)] py-16 lg:grid-cols-[1.25fr_.75fr] lg:gap-16 lg:py-24">
+      <section className="relative grid items-center overflow-hidden border-b border-[var(--line)] py-10 lg:grid-cols-[1.25fr_.75fr] lg:gap-12 lg:py-14">
         <div className="relative z-10">
           <p className="eyebrow">Verified player dashboard / Universe 10455462279</p>
-          <h1 className="display-font m-0 max-w-[920px] text-[clamp(3.4rem,8.7vw,7.9rem)] font-bold leading-[0.83] tracking-[-0.072em] text-[var(--paper)]">
-            Survive Verity in Area 51 <span className="text-[var(--cyan)]">Guide:</span> Weapons, Map, Coins &amp; Gamepasses
+          <h1 className="display-font m-0 max-w-[920px] text-[clamp(3rem,5.7vw,5.2rem)] font-bold leading-[0.9] tracking-[-0.055em] text-[var(--paper)]">
+            Survive Verity in Area 51 <span className="mr-[0.08em] text-[var(--cyan)]">Guide:</span>Weapons, Map, Coins &amp; Gamepasses
           </h1>
-          <p className="mt-7 max-w-3xl text-lg text-[var(--muted)] sm:text-xl">
+          <p className="mt-5 max-w-2xl text-base text-[var(--muted)] sm:text-lg">
             Find verified weapons, map locations, coin routes, Gamepass prices and current update status—without fake codes or made-up stats.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link className="button-primary" href="/weapons/">View weapons <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
             <a className="button-secondary" href={ROBLOX_GAME_URL} rel="noopener noreferrer" target="_blank">Play on Roblox <ExternalLink className="h-4 w-4" aria-hidden="true" /></a>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
             <LastVerified date={dashboard.capturedAt} />
             <span className="mono text-[11px] uppercase tracking-[0.08em] text-[var(--amber)]">Fan-made / Not affiliated</span>
           </div>
         </div>
 
-        <div className="relative mt-14 min-h-[320px] lg:mt-0" aria-hidden="true">
-          <div className="absolute left-1/2 top-1/2 aspect-square w-[min(82vw,430px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--line-strong)]">
+        <div className="relative hidden lg:block lg:min-h-[360px]" aria-hidden="true">
+          <div className="absolute left-1/2 top-1/2 aspect-square w-[min(34vw,430px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--line-strong)]">
             <div className="absolute inset-[13%] rounded-full border border-dashed border-[var(--line-strong)]" />
             <div className="absolute inset-[31%] rounded-full border border-[var(--line-strong)]" />
             <div className="absolute left-1/2 top-0 h-full w-px bg-[var(--line)]" />
@@ -170,9 +170,9 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
         <h2 className="section-title" id="guides-heading">Choose a field file.</h2>
         <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {guideCards.map(({ title, copy, href, code, icon: Icon }) => (
-            <Link className="terminal-panel group min-h-[230px] p-6 no-underline transition-transform hover:-translate-y-1" href={href} key={href}>
+            <Link className="terminal-panel group min-h-[205px] p-6 no-underline transition-transform hover:-translate-y-1" href={href} key={href}>
               <div className="flex items-start justify-between"><span className="grid h-11 w-11 place-items-center border border-[var(--line-strong)] text-[var(--cyan)]"><Icon className="h-5 w-5" aria-hidden="true" /></span><span className="mono text-[10px] text-[var(--muted)]">{code}</span></div>
-              <h3 className="display-font mb-2 mt-10 text-2xl font-bold tracking-tight group-hover:text-[var(--cyan)]">{title}</h3>
+              <h3 className="display-font mb-2 mt-7 text-2xl font-bold tracking-tight group-hover:text-[var(--cyan)]">{title}</h3>
               <p className="m-0 text-sm text-[var(--muted)]">{copy}</p>
             </Link>
           ))}
