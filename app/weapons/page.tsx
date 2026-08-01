@@ -1,26 +1,109 @@
-import { Crosshair, DatabaseZap, Gauge, MapPin } from "lucide-react";
+import { Coins, Crosshair, FlaskConical, Gauge } from "lucide-react";
 import type { Metadata } from "next";
 
 import { PageShell, RelatedLinks } from "@/components/site/PageShell";
-import { EmptyVerifiedState, VerificationStatus } from "@/components/site/TrustUI";
+import { ArticleStructuredData } from "@/components/site/StructuredData";
+import { EvidenceLink, LastVerified, VerificationStatus } from "@/components/site/TrustUI";
+import { FIELD_GUIDE_VERIFIED_AT, fieldSources, weaponRecords } from "@/data/field-guides";
 
 export const metadata: Metadata = {
-  title: "Best Weapons in Survive Verity in Area 51: Stats & Locations",
-  description: "Evidence-gated Survive Verity in Area 51 weapon stats, prices, unlock locations, ammo, and use cases.",
+  title: "Free Weapons in Survive Verity in Area 51: Prices & Damage Feel",
+  description: "Six named free-to-play weapons, shop prices, unlock method, and source-backed damage feel for MP7, SG, and AKM in Survive Verity in Area 51.",
   alternates: { canonical: "/weapons/" },
-  robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
+  openGraph: {
+    title: "Survive Verity in Area 51 Free Weapons Guide",
+    description: "Three gameplay-tested weapons plus three clearly labelled testing records.",
+    url: "/weapons/",
+    type: "article",
+  },
 };
-
-const fields = ["Weapon name and type", "Price or unlock method", "Damage and fire rate", "Range, ammo, and reload behavior", "Spawn or unlock location", "Gamepass requirement", "Best use with test conditions", "Version, date, and evidence"];
 
 export default function WeaponsPage() {
   return (
-    <PageShell label="Weapons / Noindex" title="Survive Verity in Area 51 Weapons Guide" intro="This field file is ready for evidence, but it is not an indexed ranking yet. Fewer than six weapons have complete, current gameplay records.">
-      <div className="mb-8 flex flex-wrap items-center gap-3 border-y border-[var(--line)] py-4"><VerificationStatus status="unverified" /><span className="mono text-[10px] uppercase tracking-[.1em] text-[var(--amber)]">NOINDEX ACTIVE / Evidence threshold not met</span></div>
-      <EmptyVerifiedState title="No verified weapon table is published yet"><p className="m-0">Official Gamepass names confirm that paid weapon products exist, but they do not prove damage, ammo, spawn location, or combat performance. We will not turn product names into fabricated weapon stats.</p></EmptyVerifiedState>
-      <section className="section-space" aria-labelledby="weapon-evidence"><p className="eyebrow">Publication gate</p><h2 className="section-title" id="weapon-evidence">What each weapon record must prove</h2><div className="mt-8 grid gap-3 md:grid-cols-2">{fields.map((field, index) => { const Icon = [Crosshair, DatabaseZap, Gauge, MapPin][index % 4]; return <div className="terminal-panel flex items-center gap-4 p-5" key={field}><span className="mono text-xs text-[var(--cyan)]">0{index + 1}</span><Icon className="h-4 w-4 shrink-0 text-[var(--muted)]" aria-hidden="true" /><span className="font-bold">{field}</span></div>; })}</div></section>
-      <section className="section-space terminal-panel p-6 sm:p-8"><p className="eyebrow">Minimum release standard</p><h2 className="display-font text-3xl font-bold">Six real weapons, comparable evidence</h2><p className="max-w-3xl text-[var(--muted)]">The page becomes indexable only after at least six real weapons have verified prices or unlock methods and practical use cases. Unknown numerical fields will display “Not verified” instead of estimates.</p></section>
-      <RelatedLinks links={[["Gamepass guide", "/gamepasses/", "See official paid product names and prices."], ["Coins & Rebirth", "/coins-rebirth/", "Review the coin-run testing protocol."], ["Update tracker", "/updates/", "Match tests to the current version."]]} />
+    <PageShell
+      label="Weapons"
+      title="Free Weapons in Survive Verity in Area 51"
+      intro="Three coin weapons now have a real purchase-to-combat evidence chain. Three more are named from the current shop and stay clearly marked as testing instead of receiving invented stats."
+    >
+      <ArticleStructuredData
+        path="/weapons/"
+        title="Free Weapons in Survive Verity in Area 51"
+        description="Source-backed prices, unlock methods, and damage feel for current free-to-play weapons."
+        dateModified={FIELD_GUIDE_VERIFIED_AT}
+      />
+
+      <div className="mb-8 flex flex-wrap items-center gap-4 border-y border-[var(--line)] py-4">
+        <VerificationStatus status="gameplay-tested" />
+        <LastVerified date={FIELD_GUIDE_VERIFIED_AT} />
+        <span className="mono text-[10px] uppercase tracking-[.1em] text-[var(--cyan)]">INDEXABLE / 3 purchase + combat records</span>
+      </div>
+
+      <section className="grid gap-3 sm:grid-cols-3" aria-label="Weapon evidence summary">
+        {[
+          ["Gameplay tested", "3", Crosshair],
+          ["Shop catalogued", "6", Coins],
+          ["Exact DPS claims", "0", FlaskConical],
+        ].map(([label, value, Icon]) => (
+          <div className="terminal-panel p-5" key={String(label)}>
+            <Icon className="h-5 w-5 text-[var(--cyan)]" aria-hidden="true" />
+            <p className="display-font mb-1 mt-8 text-4xl font-bold">{String(value)}</p>
+            <p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">{String(label)}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="section-space" aria-labelledby="weapon-table">
+        <p className="eyebrow">Free-to-play armoury</p>
+        <h2 className="section-title" id="weapon-table">Six named coin weapons</h2>
+        <p className="mt-4 max-w-3xl text-[var(--muted)]">Here, “free weapon” means obtainable with coins earned in play and no Robux purchase was used in the cited sequence. It does not mean the shop price is zero.</p>
+        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          {weaponRecords.map((weapon, index) => (
+            <article className="terminal-panel flex h-full flex-col p-6" key={weapon.name}>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="mono m-0 text-[10px] uppercase tracking-[.12em] text-[var(--muted)]">Record 0{index + 1}</p>
+                  <h3 className="display-font mb-1 mt-2 text-3xl font-bold">{weapon.name}</h3>
+                </div>
+                <VerificationStatus status={weapon.status} />
+              </div>
+              <div className="mt-6 grid gap-4 border-y border-[var(--line)] py-5 sm:grid-cols-2">
+                <div><p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Shop price</p><p className="mb-0 mt-2 font-bold text-[var(--cyan)]">{weapon.price}</p></div>
+                <div><p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">How to get it</p><p className="mb-0 mt-2 text-sm">{weapon.acquisition}</p></div>
+              </div>
+              <div className="mt-5 flex-1">
+                <p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Damage feel</p>
+                <p className={`mb-0 mt-2 text-sm ${weapon.status === "unverified" ? "font-bold text-[var(--amber)]" : "text-[var(--muted)]"}`}>{weapon.feel}</p>
+                <p className="mt-4 text-xs text-[var(--muted)]">{weapon.evidence}</p>
+              </div>
+              <div className="mt-5"><EvidenceLink href={weapon.sourceUrl}>{weapon.sourceLabel}</EvidenceLink></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-space grid gap-5 lg:grid-cols-[1.15fr_.85fr]" aria-labelledby="weapon-video">
+        <div className="terminal-panel overflow-hidden">
+          <div className="aspect-video">
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="h-full w-full"
+              loading="lazy"
+              src="https://www.youtube-nocookie.com/embed/O2o-2k-66w0?start=124&rel=0"
+              title="Gameplay evidence for free weapon purchases and combat"
+            />
+          </div>
+        </div>
+        <div className="terminal-panel p-6">
+          <Gauge className="h-5 w-5 text-[var(--amber)]" aria-hidden="true" />
+          <p className="eyebrow mt-8">Reading the numbers</p>
+          <h2 className="display-font mt-3 text-3xl font-bold" id="weapon-video">Damage feel, not fake precision</h2>
+          <p className="text-sm text-[var(--muted)]">Visible hit ticks can overlap across pellets, teammates, critical hits, and event modifiers. The tested rows describe the practical feel and disclose what the footage can actually support.</p>
+          <EvidenceLink href={fieldSources.competitorWeapons}>Compare the direct competitor’s placeholder-only table</EvidenceLink>
+        </div>
+      </section>
+
+      <RelatedLinks links={[["Coins & Rebirth", "/coins-rebirth/", "Put the tested loadouts in their observed coin-run context."], ["Map Lite", "/map/", "Follow the five-point video route board."], ["Codes status", "/codes/", "Check the visible redemption-interface audit."]]} />
     </PageShell>
   );
 }

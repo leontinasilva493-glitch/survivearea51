@@ -1,26 +1,78 @@
-import { Camera, Filter, MapPinned, MousePointer2 } from "lucide-react";
+import { Camera, CheckCircle2, MapPinned, Route } from "lucide-react";
 import type { Metadata } from "next";
 
 import { PageShell, RelatedLinks } from "@/components/site/PageShell";
-import { EmptyVerifiedState, VerificationStatus } from "@/components/site/TrustUI";
+import { EvidenceLink, LastVerified, VerificationStatus } from "@/components/site/TrustUI";
+import { FIELD_GUIDE_VERIFIED_AT, fieldSources, mapPoints } from "@/data/field-guides";
 
 export const metadata: Metadata = {
-  title: "Survive Verity in Area 51 Map: Spawns, Items & Safe Routes",
-  description: "Evidence-gated map locations for Survive Verity in Area 51, including spawns, items, enemies, bosses, entrances, and safe areas.",
+  title: "Survive Verity in Area 51 Map Lite: 5 Key Locations",
+  description: "A source-backed five-point video route covering spawn, the Normal Gun Shop, facility gate, central combat room, and a provisional Backrooms route.",
   alternates: { canonical: "/map/" },
   robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
 };
 
-const markerTypes = ["Player Spawn", "Weapons", "Items", "Enemies", "Bosses", "Safe Areas", "Area 51 Entrances", "Backrooms Entrances"];
-
 export default function MapPage() {
   return (
-    <PageShell label="Map / Noindex" title="Survive Verity in Area 51 Map and Location Guide" intro="No map image is shown because this guide does not yet have a real game map and eight verified locations. An AI-generated layout would be misleading.">
-      <div className="mb-8 flex flex-wrap items-center gap-3 border-y border-[var(--line)] py-4"><VerificationStatus status="unverified" /><span className="mono text-[10px] uppercase tracking-[.1em] text-[var(--amber)]">NOINDEX ACTIVE / 0 of 8 verified points</span></div>
-      <EmptyVerifiedState title="Map preview hidden until real evidence exists"><p className="m-0">The official game description confirms Area 51 and the Backrooms as settings, but it does not provide a floor plan, entrance coordinates, safe route, or item spawn map.</p></EmptyVerifiedState>
-      <section className="section-space" aria-labelledby="map-lite"><p className="eyebrow">Map Lite scope</p><h2 className="section-title" id="map-lite">Small, clickable, and evidence-backed</h2><div className="mt-8 grid gap-3 md:grid-cols-3"><div className="terminal-panel p-6"><MapPinned className="h-5 w-5 text-[var(--cyan)]" /><h3 className="display-font mb-2 mt-8 text-2xl font-bold">Real base image</h3><p className="m-0 text-sm text-[var(--muted)]">Captured from current gameplay with version and date.</p></div><div className="terminal-panel p-6"><Filter className="h-5 w-5 text-[var(--cyan)]" /><h3 className="display-font mb-2 mt-8 text-2xl font-bold">Category filters</h3><p className="m-0 text-sm text-[var(--muted)]">Show only the location types a player needs.</p></div><div className="terminal-panel p-6"><MousePointer2 className="h-5 w-5 text-[var(--cyan)]" /><h3 className="display-font mb-2 mt-8 text-2xl font-bold">Tap details</h3><p className="m-0 text-sm text-[var(--muted)]">Every marker opens a name, explanation, and screenshot.</p></div></div></section>
-      <section className="section-space terminal-panel p-6 sm:p-8" aria-labelledby="marker-queue"><div className="flex items-center gap-3"><Camera className="h-5 w-5 text-[var(--amber)]" /><p className="eyebrow !m-0">Evidence queue</p></div><h2 className="display-font mt-8 text-3xl font-bold" id="marker-queue">Location types waiting for screenshots</h2><div className="mt-6 flex flex-wrap gap-2">{markerTypes.map((type) => <span className="mono border border-[var(--line)] px-3 py-2 text-[10px] uppercase tracking-[.08em] text-[var(--muted)]" key={type}>{type}</span>)}</div></section>
-      <RelatedLinks links={[["Weapons guide", "/weapons/", "Pair spawn locations with verified weapon records."], ["Coins & Rebirth", "/coins-rebirth/", "Build routes from timed gameplay tests."], ["Update tracker", "/updates/", "Re-check locations after game updates."]]} />
+    <PageShell
+      label="Map Lite / Noindex"
+      title="Survive Verity in Area 51 Map Lite"
+      intro="This first map is a timestamped video route board, not an AI-generated floor plan. Four anchors are visible in current gameplay; the Backrooms lead is deliberately provisional until its exact doorway is captured."
+    >
+      <div className="mb-8 flex flex-wrap items-center gap-4 border-y border-[var(--line)] py-4">
+        <VerificationStatus status="community-reported" />
+        <LastVerified date={FIELD_GUIDE_VERIFIED_AT} />
+        <span className="mono text-[10px] uppercase tracking-[.1em] text-[var(--amber)]">NOINDEX ACTIVE / 4 observed + 1 provisional</span>
+      </div>
+
+      <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]" aria-labelledby="map-board">
+        <div className="terminal-panel overflow-hidden">
+          <div className="aspect-video">
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="h-full w-full"
+              loading="lazy"
+              src="https://www.youtube-nocookie.com/embed/O2o-2k-66w0?start=8&rel=0"
+              title="Map Lite gameplay route from spawn into the facility"
+            />
+          </div>
+          <div className="border-t border-[var(--line)] p-4">
+            <p className="mono m-0 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Current-version evidence board · open the timestamps below to jump to each landmark</p>
+          </div>
+        </div>
+        <div className="terminal-panel p-6">
+          <MapPinned className="h-6 w-6 text-[var(--cyan)]" aria-hidden="true" />
+          <p className="eyebrow mt-8">Map status</p>
+          <h2 className="display-font mt-3 text-3xl font-bold" id="map-board">Useful now, spatially honest</h2>
+          <p className="text-sm text-[var(--muted)]">The sequence is real, but the footage does not justify inventing distances, cardinal directions, or a complete facility outline. A static annotated screenshot will replace this board after an in-game capture pass.</p>
+          <EvidenceLink href={`${fieldSources.yasiVideo}&t=8s`}>Open the full source video</EvidenceLink>
+        </div>
+      </section>
+
+      <section className="section-space" aria-labelledby="route-points">
+        <div className="flex items-center gap-3"><Route className="h-5 w-5 text-[var(--cyan)]" aria-hidden="true" /><p className="eyebrow !m-0">Five-point route</p></div>
+        <h2 className="section-title mt-5" id="route-points">Spawn to the deeper corridor</h2>
+        <div className="mt-8 grid gap-3">
+          {mapPoints.map((point, index) => (
+            <article className="terminal-panel grid gap-5 p-5 sm:grid-cols-[auto_1fr_auto] sm:items-center" key={point.name}>
+              <span className={`mono grid h-11 w-11 place-items-center border text-sm font-bold ${point.confidence === "Observed" ? "border-[rgba(130,248,230,.42)] text-[var(--cyan)]" : "border-[rgba(255,201,107,.48)] text-[var(--amber)]"}`}>{index + 1}</span>
+              <div>
+                <div className="flex flex-wrap items-center gap-3"><h3 className="display-font m-0 text-2xl font-bold">{point.name}</h3><span className={`mono text-[9px] uppercase tracking-[.1em] ${point.confidence === "Observed" ? "text-[var(--cyan)]" : "text-[var(--amber)]"}`}>{point.confidence}</span></div>
+                <p className="mb-0 mt-2 text-sm text-[var(--muted)]">{point.detail}</p>
+              </div>
+              <EvidenceLink href={`${fieldSources.yasiVideo}&t=${point.seconds}s`}>{point.time}</EvidenceLink>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-space grid gap-4 md:grid-cols-2">
+        <div className="terminal-panel p-6"><CheckCircle2 className="h-5 w-5 text-[var(--cyan)]" /><h2 className="display-font mb-2 mt-8 text-2xl font-bold">Safe-zone finding</h2><p className="m-0 text-sm text-[var(--muted)]">The spawn lobby behaves as the observed staging and return area in the reviewed runs. “Safe” here does not yet mean invulnerability-tested.</p></div>
+        <div className="terminal-panel p-6"><Camera className="h-5 w-5 text-[var(--amber)]" /><h2 className="display-font mb-2 mt-8 text-2xl font-bold">Next capture needed</h2><p className="m-0 text-sm text-[var(--muted)]">Record the labelled Backrooms threshold and one overhead or wide shot that can carry five spatially accurate markers.</p></div>
+      </section>
+
+      <RelatedLinks links={[["Weapons guide", "/weapons/", "Match the shop stop to six named coin weapons."], ["Coins & Rebirth", "/coins-rebirth/", "Review two observed loops from the same footage."], ["Update tracker", "/updates/", "Re-check landmarks when the game changes."]]} />
     </PageShell>
   );
 }

@@ -1,0 +1,135 @@
+export const FIELD_GUIDE_VERIFIED_AT = "2026-08-01T08:00:00.000Z";
+
+export const fieldSources = {
+  officialGame: "https://www.roblox.com/games/74716719697996/Survive-Verity-in-Area-51",
+  yasiVideo: "https://www.youtube.com/watch?v=O2o-2k-66w0",
+  dylanVideo: "https://www.youtube.com/watch?v=mmd6Bawlcxk",
+  creatorExchange: "https://creatorexchange.io/roblox-game/10455462279/survive-verity-in-area-51",
+  competitorWeapons: "https://surviveverityinarea51.wiki/en/weapons-items/",
+  competitorMap: "https://surviveverityinarea51.wiki/en/map-backrooms/",
+  competitorCodes: "https://surviveverityinarea51.wiki/en/codes/",
+} as const;
+
+export const weaponRecords = [
+  {
+    name: "MP7",
+    price: "5K coins",
+    acquisition: "Buy from the Normal Gun Shop beside the spawn lobby.",
+    feel: "Fast automatic starter. The footage shows small, rapid hit ticks around 10–20 during mixed combat; sustained spray matters more than single-shot punch.",
+    evidence: "Bought at about 02:04; the balance drops from roughly 5.5K to 500, then the equipped weapon is used in the next run.",
+    sourceUrl: `${fieldSources.yasiVideo}&t=124s`,
+    sourceLabel: "Purchase and run at 02:04",
+    status: "gameplay-tested",
+  },
+  {
+    name: "SG",
+    price: "27.5K coins",
+    acquisition: "Buy from the Normal Gun Shop beside the spawn lobby.",
+    feel: "Heavier burst feedback than the MP7. Large stacked hit numbers appear in the fight, but pellets and other players make exact single-shot damage unsafe to claim.",
+    evidence: "Equipped at about 05:14; the balance falls from 38.3K to 10.8K, matching the 27.5K shop price.",
+    sourceUrl: `${fieldSources.yasiVideo}&t=306s`,
+    sourceLabel: "Shop and combat at 05:06",
+    status: "gameplay-tested",
+  },
+  {
+    name: "AKM",
+    price: "67.5K coins",
+    acquisition: "Buy from the Normal Gun Shop beside the spawn lobby.",
+    feel: "Heavy automatic upgrade. Repeated visible hit ticks near 105 appear in this run, making it feel much punchier than the MP7; this is not a lab DPS test.",
+    evidence: "Bought and equipped around 09:20–09:42; the balance drops by about 67.5K before combat begins.",
+    sourceUrl: `${fieldSources.yasiVideo}&t=560s`,
+    sourceLabel: "Purchase and damage ticks at 09:20",
+    status: "gameplay-tested",
+  },
+  {
+    name: "Combat Knife",
+    price: "2.5K coins",
+    acquisition: "Listed in the Normal Gun Shop.",
+    feel: "More weapons being tested",
+    evidence: "Name and price are visible in the shop; combat behavior has not been isolated.",
+    sourceUrl: `${fieldSources.yasiVideo}&t=124s`,
+    sourceLabel: "Shop catalogue at 02:04",
+    status: "unverified",
+  },
+  {
+    name: "P90",
+    price: "10K coins",
+    acquisition: "Listed in the Normal Gun Shop.",
+    feel: "More weapons being tested",
+    evidence: "Name and price are visible in the shop; combat behavior has not been isolated.",
+    sourceUrl: `${fieldSources.yasiVideo}&t=124s`,
+    sourceLabel: "Shop catalogue at 02:04",
+    status: "unverified",
+  },
+  {
+    name: "M4A1",
+    price: "45K coins",
+    acquisition: "Listed in the Normal Gun Shop.",
+    feel: "More weapons being tested",
+    evidence: "Name and price are visible in the shop; combat behavior has not been isolated.",
+    sourceUrl: `${fieldSources.yasiVideo}&t=306s`,
+    sourceLabel: "Shop catalogue at 05:06",
+    status: "unverified",
+  },
+] as const;
+
+export const mapPoints = [
+  {
+    name: "Spawn lobby",
+    time: "00:08",
+    seconds: 8,
+    confidence: "Observed",
+    detail: "The safe staging area where runs begin and players return. No enemy combat is visible here, but invulnerability has not been tested.",
+  },
+  {
+    name: "Normal Gun Shop",
+    time: "02:04",
+    seconds: 124,
+    confidence: "Observed",
+    detail: "The yellow GUNS pad and shop interface beside spawn. This is the confirmed source for the coin-bought weapons on the Weapons page.",
+  },
+  {
+    name: "Main facility gate",
+    time: "02:22",
+    seconds: 142,
+    confidence: "Observed",
+    detail: "The lobby-to-combat transition through the stone-and-metal doorway with the face marker.",
+  },
+  {
+    name: "Central combat room",
+    time: "03:36",
+    seconds: 216,
+    confidence: "Observed",
+    detail: "A large pale rectangular chamber that works as a practical orientation point during the first combat loop.",
+  },
+  {
+    name: "Backrooms route candidate",
+    time: "10:40",
+    seconds: 640,
+    confidence: "Provisional",
+    detail: "A distinctive lower truss corridor reached deeper in the run. The official game confirms the Backrooms, but this footage does not expose a labelled entrance, so the exact doorway remains under test.",
+  },
+] as const;
+
+export const coinRuns = [
+  {
+    label: "Observed loop A",
+    start: "500",
+    finish: "38.3K",
+    net: "37.8K",
+    elapsed: "2m 44s",
+    rate: "13.8K/min",
+    sourceUrl: `${fieldSources.yasiVideo}&t=140s`,
+    note: "MP7 run; likely recorded during the x2 Coins event window.",
+  },
+  {
+    label: "Observed loop B",
+    start: "33.6K",
+    finish: "106.4K",
+    net: "72.8K",
+    elapsed: "3m 20s",
+    rate: "21.8K/min",
+    sourceUrl: `${fieldSources.yasiVideo}&t=584s`,
+    note: "AKM run with multiplayer and quest-completion notices visible.",
+  },
+] as const;
