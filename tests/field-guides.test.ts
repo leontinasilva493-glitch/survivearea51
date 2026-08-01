@@ -55,6 +55,10 @@ test("coins guide publishes two observed loops without calling either a baseline
     assert.match(html, /72\.8K/);
     assert.match(html, /3m 20s/);
     assert.match(html, /21\.8K\/min/);
+    assert.match(html, /Benchmark v0/);
+    assert.match(html, /2 observed samples/);
+    assert.match(html, /13\.8K–21\.8K\/min observed range/);
+    assert.match(html, /0 \/ 3 controlled repeats/);
     assert.match(html, /not a controlled baseline/i);
   } finally {
     globalThis.fetch = previousFetch;
