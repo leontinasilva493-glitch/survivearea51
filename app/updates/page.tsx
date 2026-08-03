@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { PageShell, RelatedLinks } from "@/components/site/PageShell";
 import { ArticleStructuredData } from "@/components/site/StructuredData";
 import { LastVerified, SourceBadge, VerificationStatus } from "@/components/site/TrustUI";
+import { VideoEvidenceCard } from "@/components/site/VideoEvidenceCard";
+import { communityVideos } from "@/data/community-videos";
 import { loadRobloxDashboard } from "@/lib/roblox";
 import { readUpdateSignal } from "@/lib/update-signal";
 
@@ -47,6 +49,27 @@ export default async function UpdatesPage() {
           <li className="relative ml-6 list-none pb-10"><span className="absolute -left-[31px] top-1 h-3 w-3 bg-[var(--cyan)]" /><div className="flex flex-wrap items-center gap-3"><VerificationStatus status="confirmed" /><time className="mono text-[10px] uppercase text-[var(--muted)]" dateTime={data.game.created}>{fullDate(data.game.created)}</time></div><h3 className="display-font mb-2 mt-4 text-2xl font-bold">Roblox universe created</h3><p className="m-0 max-w-3xl text-[var(--muted)]">Universe {data.game.id} and place {data.game.rootPlaceId} identify this game across display-title changes.</p></li>
         </ol>
       </section>
+
+      <VideoEvidenceCard
+        embed
+        eyebrow="Community footage / current-version candidate"
+        headingId="cruelty-video-evidence"
+        limits={[
+          "It does not document a complete moveset, spawn schedule, drop table, or balance change.",
+          "Server age and later updates may produce different results.",
+        ]}
+        summary="Community gameplay uploaded on August 1 shows a Cruelty-labelled run inside the same named Roblox experience. It is useful visual evidence for the next in-game review, not a substitute for official patch notes."
+        supportingLinks={[
+          { href: communityVideos.falsity.url, label: "Review the earlier Falsity run" },
+          { href: communityVideos.bosses.url, label: "Open the short boss montage" },
+        ]}
+        supports={[
+          "A Cruelty-labelled play session is publicly visible in this August 1 upload.",
+          "The footage can guide a current-version test of visible encounters and routes.",
+        ]}
+        title="What current Cruelty footage actually shows"
+        video={communityVideos.cruelty}
+      />
 
       <section className="section-space grid gap-3 md:grid-cols-2" aria-labelledby="status-rules">
         <div className="terminal-panel p-6"><CircleDot className="h-5 w-5 text-[var(--cyan)]" /><h2 className="display-font mt-7 text-2xl font-bold" id="status-rules">Currently listed by the official page</h2><ul className="mt-5 space-y-3 pl-5 text-[var(--muted)]"><li>Area 51 and the Backrooms</li><li>Weapons and survival items</li><li>Team play with friends</li></ul><p className="mono mt-5 text-[10px] uppercase tracking-[.1em] text-[var(--muted)]">Page listing ≠ full gameplay verification</p></div>

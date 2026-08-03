@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 
 import { PageShell, RelatedLinks } from "@/components/site/PageShell";
 import { EvidenceLink, SourceBadge, VerificationStatus } from "@/components/site/TrustUI";
+import { VideoEvidenceCard } from "@/components/site/VideoEvidenceCard";
+import { communityVideos } from "@/data/community-videos";
 import { coinRuns, fieldSources } from "@/data/field-guides";
 import { calculateCoinRun, formatCoinAmount, formatCoinRate, formatDuration, summarizeCoinRuns } from "@/lib/coin-benchmark";
 import { loadRobloxDashboard } from "@/lib/roblox";
@@ -64,6 +66,24 @@ export default async function CoinsPage() {
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-2">{calculatedRuns.map((run) => <p className="terminal-panel m-0 p-4 text-xs text-[var(--muted)]" key={run.label}><strong className="text-[var(--paper)]">{run.label}:</strong> {run.note}</p>)}</div>
       </section>
+
+      <VideoEvidenceCard
+        eyebrow="Route candidate / excluded from benchmark"
+        headingId="fast-coin-route-candidate"
+        limits={[
+          "Start and finish balances",
+          "Elapsed time",
+          "Rebirth and x2 modifiers",
+          "Quests, teammates, and loadout",
+        ]}
+        summary="The upload demonstrates a route worth testing, but its title does not establish a typical coins-per-minute rate. It stays outside the benchmark until the variables below are visible and repeatable."
+        supports={[
+          "Use the route order as a candidate for the next controlled capture.",
+          "Repeat the same route three times before comparing it with the current two observations.",
+        ]}
+        title="Candidate fast-coin route — not a benchmark yet"
+        video={communityVideos.fastCoins}
+      />
 
       <section className="section-space grid gap-4 lg:grid-cols-[.8fr_1.2fr]" aria-labelledby="coin-pass">
         <div className="terminal-panel p-6"><SourceBadge state={data.gamepassSource} /><p className="mono mt-8 text-[10px] uppercase tracking-[.12em] text-[var(--muted)]">Official product record</p><h2 className="display-font my-2 text-4xl font-bold" id="coin-pass">{coinPass?.name ?? "x2 Coins"}</h2><p className="mono text-lg font-bold text-[var(--cyan)]">{coinPass?.price ?? 149} ROBUX</p><VerificationStatus status="confirmed" /></div>

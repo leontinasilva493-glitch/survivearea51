@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { PageShell, RelatedLinks } from "@/components/site/PageShell";
 import { ArticleStructuredData } from "@/components/site/StructuredData";
 import { EvidenceLink, LastVerified, VerificationStatus } from "@/components/site/TrustUI";
+import { VideoEvidenceCard } from "@/components/site/VideoEvidenceCard";
+import { communityVideos } from "@/data/community-videos";
 import { FIELD_GUIDE_VERIFIED_AT, fieldSources, weaponRecords } from "@/data/field-guides";
 
 export const metadata: Metadata = {
@@ -82,6 +84,22 @@ export default function WeaponsPage() {
           ))}
         </div>
       </section>
+
+      <VideoEvidenceCard
+        eyebrow="Community lead / location audit pending"
+        headingId="free-gun-video-lead"
+        limits={[
+          "Every pickup location and current availability still need a frame-by-frame check.",
+          "The word “all” in the upload title is not accepted as a completeness claim.",
+        ]}
+        summary="This 59-second community upload appears to show several weapon pickups. Use it as a visual checklist, not a complete location guide, until each item and route is verified in the current game version."
+        supports={[
+          "The short format is useful for identifying candidate pickup frames quickly.",
+          "Verified locations can later be attached to the matching weapon records above.",
+        ]}
+        title="Free-gun location scan — verification pending"
+        video={communityVideos.freeGuns}
+      />
 
       <section className="section-space grid gap-5 lg:grid-cols-[1.15fr_.85fr]" aria-labelledby="weapon-video">
         <div className="terminal-panel overflow-hidden">

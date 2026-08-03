@@ -5,6 +5,8 @@ import Link from "next/link";
 import { PageShell, RelatedLinks } from "@/components/site/PageShell";
 import { ArticleStructuredData } from "@/components/site/StructuredData";
 import { EvidenceLink, LastVerified, VerificationStatus } from "@/components/site/TrustUI";
+import { VideoEvidenceCard } from "@/components/site/VideoEvidenceCard";
+import { communityVideos } from "@/data/community-videos";
 import { FIELD_GUIDE_VERIFIED_AT, coinRuns, fieldSources, mapPoints, weaponRecords } from "@/data/field-guides";
 
 export const metadata: Metadata = {
@@ -70,6 +72,22 @@ export default function BeginnerGuidePage() {
           ))}
         </ol>
       </section>
+
+      <VideoEvidenceCard
+        eyebrow="Second source / orientation comparison"
+        headingId="independent-run-check"
+        limits={[
+          "A second playthrough is not proof that every server, enemy pattern, or route is identical.",
+          "Yasi's timestamped run remains the primary source for the four checkpoints above.",
+        ]}
+        summary="Cruzie's independent playthrough is included as a second perspective, not proof of a universal fastest route. Use it to compare what a separate first run looks like before relying on any new claim."
+        supports={[
+          "A separate creator provides an independent view of the first-run experience.",
+          "Differences can identify checkpoints that need another current-version capture.",
+        ]}
+        title="Independent run check"
+        video={communityVideos.independentRun}
+      />
 
       <section className="section-space grid gap-4 lg:grid-cols-[1.05fr_.95fr]" aria-labelledby="first-purchase">
         <div className="terminal-panel p-6 sm:p-8">
