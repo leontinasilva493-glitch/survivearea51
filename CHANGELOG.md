@@ -6,6 +6,22 @@
 
 ## Unreleased
 
+### Weapons review update — 2026-08-05
+
+提交：`7f6ef15` (`feat(weapons): add melee weapon guide`)
+
+- `/weapons/` 保持既有 URL、H1、canonical 和 sitemap 收录状态；新增以 Combat Knife 为核心的 melee 搜索意图结构。
+- 将 melee 与 coin guns 拆为独立说明：Combat Knife 仅确认名称、2.5K 价格和商店来源；MP7、SG、AKM 保留购买到实战证据，P90、M4A1 保持未验证。
+- 新增四列价格阶梯表（武器、类型、价格、当前证据），明确它不是伤害、强度或 tier ranking。
+- 新增免费枪地点核验边界、Gamepass 与社区线索边界、8 条 FAQ，以及到 Beginner、Gamepasses、Map、Coins 页面的一致内链。
+- 移除玩家页中的竞品外链和比较文案；不以第三方页面的不足作为可信度主张。
+
+### 已验证
+
+- `npm.cmd test`：48/48 通过。
+- `npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build` 通过；生产构建生成 17 个静态路由。
+- 本地生产服务：`http://localhost:3000/weapons/` 返回 HTTP 200，并包含 `Melee Weapon` 内容。
+
 ### 文档
 
 - 重写 README，补充项目定位、数据边界、路由、目录、本地运行、验证和部署说明。

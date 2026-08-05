@@ -32,11 +32,11 @@
 | `/gamepasses/` | 官方 Gamepass 名称、价格和描述 | `index` |
 | `/updates/` | Cruelty、Falsity 和游戏标题变化核验 | `index` |
 | `/codes/` | 兑换系统和有效 Codes 状态 | `index` |
-| `/weapons/` | 武器实测证据收集页 | `noindex, follow` |
+| `/weapons/` | 武器价格、获取路径与实证边界指南 | `index` |
 | `/coins-rebirth/` | 金币与 Rebirth 实测证据收集页 | `noindex, follow` |
 | `/map/` | 地图位置证据收集页 | `noindex, follow` |
 
-`sitemap.xml` 只收录当前允许索引的四个 P0 页面。
+`sitemap.xml` 当前收录 6 个允许索引的核心路由；`/weapons/` 已因三条购买到实战证据链而纳入其中。
 
 ## 数据与内容原则
 

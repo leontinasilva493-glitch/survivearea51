@@ -7,6 +7,18 @@
 - `/coins-rebirth/`: keep noindex. Two rates can be calculated from visible balances, but the x2 event window, quests, multiplayer, loadout, and rebirth variables are uncontrolled.
 - `/codes/`: keep the already indexable status page. Two current gameplay videos show no visible redemption entry, while official and third-party pages provide no redeem path.
 
+## Implementation update — 2026-08-05
+
+Commit [`7f6ef15`](https://github.com/leontinasilva493-glitch/survivearea51/commit/7f6ef15) applies the approved melee-keyword update to `/weapons/` without changing its URL, H1, canonical, or sitemap inclusion.
+
+- The six weapon cards remain the first content block. Combat Knife Record 04 now carries `Melee / Not verified`.
+- The guide separates `Melee Weapon — Combat Knife` from `Coin Guns — MP7, P90, SG, M4A1, AKM`, then adds a four-column price ladder that explicitly is not a power ranking.
+- The page preserves the free-gun video as a verification tracker, distinguishes official Gamepass records from community-mentioned leads, and answers eight evidence-bounded FAQs.
+- Player-facing copy no longer links to or compares competitors. Confidence comes from the cited evidence chain and explicit unknowns.
+- Related links now direct players to the first melee versus MP7 choice, paid versus free/coin options, the Normal Gun Shop and candidate pickups, and coin affordability context.
+
+Verification for this change: 48/48 tests, lint, typecheck, and `next build` passed. The local production server returned HTTP 200 for `/` and `/weapons/` at `http://localhost:3000/`.
+
 ## Primary sources
 
 1. [Official Roblox experience](https://www.roblox.com/games/74716719697996/Survive-Verity-in-Area-51) — confirms the exact game, creator, Area 51, Backrooms, weapons, and items.
@@ -22,7 +34,7 @@
 | MP7 | 5K coins | About 02:04: balance roughly 5.5K → 500; equipped and used in the following run | Fast spray; small visible ticks around 10–20 in mixed combat | Gameplay tested |
 | SG | 27.5K coins | About 05:06–05:14: 38.3K → 10.8K; equipped and used | Heavier burst feedback; exact per-shot value obscured by pellets/team damage | Gameplay tested |
 | AKM | 67.5K coins | About 09:20–09:42: roughly 101.1K → 33.6K; combat follows | Repeated visible hit ticks near 105; stronger punch than MP7 | Gameplay tested |
-| Combat Knife | 2.5K coins | Name and price visible in the Normal Gun Shop | More weapons being tested | Shop catalogued |
+| Combat Knife | 2.5K coins | Name and price visible in the Normal Gun Shop | Melee / combat behavior not yet isolated | Melee / Not verified |
 | P90 | 10K coins | Name and price visible in the Normal Gun Shop | More weapons being tested | Shop catalogued |
 | M4A1 | 45K coins | Name and price visible in the Normal Gun Shop | More weapons being tested | Shop catalogued |
 
@@ -57,11 +69,9 @@ These are observations, not a fastest route or beginner baseline. The upload dat
 - Creator Exchange: reports no codes yet.
 - Safe conclusion: **No visible code redemption entry was observed on 2026-08-01.** Do not convert that into “codes can never exist.”
 
-## Direct competitor gaps
+## Editorial boundary
 
-- [Weapons page](https://surviveverityinarea51.wiki/en/weapons-items/) uses generic “Weapon Slot 1/2/3” placeholders without real names, prices, or damage evidence.
-- [Map page](https://surviveverityinarea51.wiki/en/map-backrooms/) describes broad areas but has no real landmark screenshot or fixed route markers.
-- [Codes page](https://surviveverityinarea51.wiki/en/codes/) says no codes while also presenting invented-looking placeholder strings and generic redemption steps that are not supported by the current UI audit.
+Player-facing pages do not link to or compare competitors. The guide earns trust through its own timestamps, official records, evidence labels, and explicit unknowns rather than by criticizing another site.
 
 ## Next verification queue
 
