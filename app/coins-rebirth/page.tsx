@@ -92,7 +92,7 @@ export default async function CoinsPage() {
 
       <section className="section-space" aria-labelledby="test-protocol"><p className="eyebrow">Next verification pass</p><h2 className="section-title" id="test-protocol">Turn the observed range into a baseline</h2><div className="mt-8 grid gap-3 md:grid-cols-2">{testFields.map(([title, copy, Icon]) => <div className="terminal-panel p-6" key={title}><Icon className="h-5 w-5 text-[var(--cyan)]" aria-hidden="true" /><h3 className="display-font mb-1 mt-8 text-2xl font-bold">{title}</h3><p className="m-0 text-sm text-[var(--muted)]">{copy}</p></div>)}</div></section>
 
-      <RelatedLinks links={[["Beginner guide", "/beginner-guide/", "Place these observations inside the first-run workflow."], ["Weapons guide", "/weapons/", "See the MP7, SG, and AKM used around these runs."], ["Gamepass guide", "/gamepasses/", "Open the official x2 Coins product record."]]} />
+      <RelatedLinks links={[["Beginner guide", "/beginner-guide/", "Place these observations inside the first-run workflow."], ["Weapons guide", "/weapons/", "Estimate how long each coin gun takes to afford."], ["Gamepass guide", "/gamepasses/", "Open the official x2 Coins product record."]]} />
     </PageShell>
   );
 }

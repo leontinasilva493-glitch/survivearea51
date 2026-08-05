@@ -3,8 +3,10 @@ import test from "node:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import CodesPage from "../app/codes/page";
+import BeginnerGuidePage from "../app/beginner-guide/page";
 import CoinsPage from "../app/coins-rebirth/page";
 import MapPage from "../app/map/page";
+import GamepassesPage from "../app/gamepasses/page";
 import sitemap from "../app/sitemap";
 import WeaponsPage, { metadata as weaponsMetadata } from "../app/weapons/page";
 
@@ -22,6 +24,49 @@ test("weapons guide releases three gameplay-tested records and three honest queu
   assert.ok(sitemap().some(({ url }) => url.endsWith("/weapons/")));
 });
 
+
+test("weapons guide separates the melee option from coin guns without inventing a tier list", () => {
+  const html = renderToStaticMarkup(WeaponsPage());
+
+  assert.match(html, /The only confirmed melee weapon in Survive Verity in Area 51 is the Combat Knife/);
+  assert.match(html, /<h2[^>]*>How to Get Weapons<\/h2>/);
+  assert.match(html, /<h3[^>]*>Melee Weapon[^<]*Combat Knife<\/h3>/);
+  assert.match(html, /<h4[^>]*>Combat Knife[^<]*Current Melee Evidence<\/h4>/);
+  assert.match(html, /<h3[^>]*>Coin Guns[^<]*MP7, P90, SG, M4A1, AKM<\/h3>/);
+  assert.match(html, /<h3[^>]*>Free Gun Locations[^<]*Verification Tracker<\/h3>/);
+  assert.match(html, /<h2[^>]*>Weapon Price and Progression Path<\/h2>/);
+  assert.match(html, /<h3[^>]*>Price Ladder[^<]*Not a Power Ranking<\/h3>/);
+  assert.match(html, /This is a price ladder, not a melee weapon or weapon tier list/);
+  assert.match(html, /Melee \/ Not verified/);
+  assert.match(html, /<h2[^>]*>Best and Rare Guns<\/h2>/);
+  assert.match(html, /Raygun MK2/);
+  assert.match(html, /Community-mentioned/);
+  assert.match(html, /Is there a melee gun in Survive Verity in Area 51\?/);
+  assert.doesNotMatch(html, /surviveverityinarea51\.wiki|direct competitor|competitor names no specific melee weapon/i);
+});
+
+test("related guides point players to the planned melee, paid, location, and affordability comparisons", async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => {
+    throw new Error("offline test");
+  };
+
+  try {
+    const [beginner, gamepasses, map, coins] = await Promise.all([
+      Promise.resolve(renderToStaticMarkup(BeginnerGuidePage())),
+      GamepassesPage().then(renderToStaticMarkup),
+      Promise.resolve(renderToStaticMarkup(MapPage())),
+      CoinsPage().then(renderToStaticMarkup),
+    ]);
+
+    assert.match(beginner, /Compare the first melee weapon and 5K MP7 options/);
+    assert.match(gamepasses, /Compare paid guns with free and coin weapons/);
+    assert.match(map, /Find the Normal Gun Shop and candidate free-gun locations/);
+    assert.match(coins, /Estimate how long each coin gun takes to afford/);
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
 test("map lite renders five route anchors and labels the Backrooms lead as provisional", () => {
   const html = renderToStaticMarkup(MapPage());
 

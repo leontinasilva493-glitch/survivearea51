@@ -115,7 +115,7 @@ export default function BeginnerGuidePage() {
         </div>
       </section>
 
-      <RelatedLinks links={[["Weapons guide", "/weapons/", "Compare the six documented coin weapons."], ["Map Lite", "/map/", "Follow the timestamped route and its release gate."], ["Coins & Rebirth", "/coins-rebirth/", "See the observed rates and uncontrolled variables."]]} />
+      <RelatedLinks links={[["Weapons guide", "/weapons/", "Compare the first melee weapon and 5K MP7 options."], ["Map Lite", "/map/", "Follow the timestamped route and its release gate."], ["Coins & Rebirth", "/coins-rebirth/", "See the observed rates and uncontrolled variables."]]} />
     </PageShell>
   );
 }

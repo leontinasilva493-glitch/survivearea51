@@ -91,7 +91,7 @@ export default async function GamepassesPage() {
         <a className="text-link mt-3" href="https://www.roblox.com/" rel="noopener noreferrer" target="_blank">Open Roblox <ExternalLink className="h-4 w-4" aria-hidden="true" /></a>
       </section>
 
-      <RelatedLinks links={[["Update tracker", "/updates/", "Check the current Cruelty announcement."], ["Codes status", "/codes/", "Avoid copied and unverified code lists."], ["Coins & Rebirth", "/coins-rebirth/", "See the evidence required to evaluate x2 Coins."]]} />
+      <RelatedLinks links={[["Weapons guide", "/weapons/", "Compare paid guns with free and coin weapons."], ["Update tracker", "/updates/", "Check the current Cruelty announcement."], ["Codes status", "/codes/", "Avoid copied and unverified code lists."], ["Coins & Rebirth", "/coins-rebirth/", "See the evidence required to evaluate x2 Coins."]]} />
     </PageShell>
   );
 }

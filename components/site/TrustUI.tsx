@@ -20,9 +20,9 @@ const statusCopy: Record<VerificationKind, { label: string; className: string }>
   outdated: { label: "Outdated", className: "border-[rgba(144,170,168,.4)] text-[var(--muted)]" },
 };
 
-export function VerificationStatus({ status }: { status: VerificationKind }) {
+export function VerificationStatus({ status, label }: { status: VerificationKind; label?: string }) {
   const item = statusCopy[status];
-  return <span className={`mono inline-flex items-center gap-1.5 border px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] ${item.className}`}><span className="h-1.5 w-1.5 bg-current" />{item.label}</span>;
+  return <span className={`mono inline-flex items-center gap-1.5 border px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] ${item.className}`}><span className="h-1.5 w-1.5 bg-current" />{label ?? item.label}</span>;
 }
 export function SourceBadge({ source = "Official Roblox Data", state = "live" }: { source?: string; state?: DataSource }) {
   return (

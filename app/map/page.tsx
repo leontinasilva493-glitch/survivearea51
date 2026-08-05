@@ -91,7 +91,7 @@ export default function MapPage() {
         <div className="terminal-panel p-6"><Camera className="h-5 w-5 text-[var(--amber)]" /><h2 className="display-font mb-2 mt-8 text-2xl font-bold">Next capture needed</h2><p className="m-0 text-sm text-[var(--muted)]">Record the labelled Backrooms threshold and one overhead or wide shot that can carry five spatially accurate markers.</p></div>
       </section>
 
-      <RelatedLinks links={[["Beginner guide", "/beginner-guide/", "Use the observed landmarks as a first-run checklist."], ["Weapons guide", "/weapons/", "Match the shop stop to six named coin weapons."], ["Coins & Rebirth", "/coins-rebirth/", "Review two observed loops from the same footage."]]} />
+      <RelatedLinks links={[["Beginner guide", "/beginner-guide/", "Use the observed landmarks as a first-run checklist."], ["Weapons guide", "/weapons/", "Find the Normal Gun Shop and candidate free-gun locations."], ["Coins & Rebirth", "/coins-rebirth/", "Review two observed loops from the same footage."]]} />
     </PageShell>
   );
 }

@@ -5,9 +5,6 @@ export const fieldSources = {
   yasiVideo: "https://www.youtube.com/watch?v=O2o-2k-66w0",
   dylanVideo: "https://www.youtube.com/watch?v=mmd6Bawlcxk",
   creatorExchange: "https://creatorexchange.io/roblox-game/10455462279/survive-verity-in-area-51",
-  competitorWeapons: "https://surviveverityinarea51.wiki/en/weapons-items/",
-  competitorMap: "https://surviveverityinarea51.wiki/en/map-backrooms/",
-  competitorCodes: "https://surviveverityinarea51.wiki/en/codes/",
 } as const;
 
 export const weaponRecords = [
@@ -50,6 +47,7 @@ export const weaponRecords = [
     sourceUrl: `${fieldSources.yasiVideo}&t=124s`,
     sourceLabel: "Shop catalogue at 02:04",
     status: "unverified",
+    badgeLabel: "Melee / Not verified",
   },
   {
     name: "P90",
