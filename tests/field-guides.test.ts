@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import CodesPage from "../app/codes/page";
 import BeginnerGuidePage from "../app/beginner-guide/page";
+import CodesPage, { metadata as codesMetadata } from "../app/codes/page";
 import CoinsPage from "../app/coins-rebirth/page";
-import MapPage from "../app/map/page";
 import GamepassesPage from "../app/gamepasses/page";
+import MapPage from "../app/map/page";
 import sitemap from "../app/sitemap";
 import WeaponsPage, { metadata as weaponsMetadata } from "../app/weapons/page";
 
@@ -23,7 +23,6 @@ test("weapons guide releases three gameplay-tested records and three honest queu
   assert.equal(weaponsMetadata.robots, undefined);
   assert.ok(sitemap().some(({ url }) => url.endsWith("/weapons/")));
 });
-
 
 test("weapons guide separates the melee option from coin guns without inventing a tier list", () => {
   const html = renderToStaticMarkup(WeaponsPage());
@@ -67,6 +66,7 @@ test("related guides point players to the planned melee, paid, location, and aff
     globalThis.fetch = previousFetch;
   }
 });
+
 test("map lite renders five route anchors and labels the Backrooms lead as provisional", () => {
   const html = renderToStaticMarkup(MapPage());
 
@@ -110,11 +110,87 @@ test("coins guide publishes two observed loops without calling either a baseline
   }
 });
 
-test("codes guide reports a dated visible-interface audit and no guessed codes", () => {
-  const html = renderToStaticMarkup(CodesPage());
+async function renderOfflineCodesPage() {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => {
+    throw new Error("offline test");
+  };
 
-  assert.match(html, /No visible code redemption entry/);
+  try {
+    return renderToStaticMarkup(await CodesPage());
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+}
+
+test("codes guide answers the primary search intent before the evidence detail", async () => {
+  const html = await renderOfflineCodesPage();
+
+  assert.match(html, />Survive Verity in Area 51 Codes</);
+  for (const label of [
+    "Verified active codes",
+    "Verified expired codes",
+    "Redemption entry",
+    "Audit coverage",
+  ]) {
+    assert.match(html, new RegExp(label));
+  }
+  for (const target of [
+    "verified-code-tracker",
+    "redeem-codes",
+    "official-signal",
+    "verification-timeline",
+    "fake-code-check",
+    "codes-faq",
+  ]) {
+    assert.match(html, new RegExp(`href="#${target}"`));
+  }
+  assert.match(String(codesMetadata.title), /0 Verified Codes/);
+  assert.equal(String(codesMetadata.alternates?.canonical), "/codes/");
+});
+
+test("codes tracker stays useful without turning guesses into entries", async () => {
+  const html = await renderOfflineCodesPage();
+
+  assert.match(html, /Verified code tracker/);
+  for (const heading of ["Code", "Reward", "Status", "Checked"]) {
+    assert.match(html, new RegExp(`>${heading}<`));
+  }
+  assert.match(html, /No verified codes to list/);
+  assert.match(html, /No verified redemption path yet/);
+  assert.equal((html.match(/Ready when/g) ?? []).length, 3);
+  assert.doesNotMatch(
+    html,
+    /MOCHIVERITY|AREA51BACKROOMS|FALSITYEVENT|SURVIVOR500|placeholder|standard Roblox pattern/i,
+  );
+  assert.doesNotMatch(html, /"@type":"HowTo"/);
+});
+
+test("codes guide separates current official signal from the dated audit", async () => {
+  const html = await renderOfflineCodesPage();
+
+  assert.match(html, /Current official signal/);
+  assert.match(html, /Official signal checked/);
+  assert.match(html, /Verification timeline/);
+  assert.match(html, /Gameplay audit/);
   assert.match(html, /Aug 01, 2026/);
   assert.match(html, /Creator Exchange/);
-  assert.doesNotMatch(html, /MOCHIVERITY|AREA51BACKROOMS|FALSITYEVENT|SURVIVOR500/);
+  assert.match(html, /does not prove rewards, mechanics, eligibility, or timing/i);
+});
+
+test("codes guide publishes visible FAQ answers and matching FAQ structured data", async () => {
+  const html = await renderOfflineCodesPage();
+
+  assert.match(html, /Frequently asked questions/);
+  for (const question of [
+    "Are there any active codes right now?",
+    "Where is the Codes button?",
+    "Why is the verified list empty?",
+    "How is a new code verified?",
+    "Should I trust codes from another website?",
+  ]) {
+    assert.match(html, new RegExp(question.replace("?", "\\?")));
+  }
+  assert.match(html, /"@type":"FAQPage"/);
+  assert.equal((html.match(/"@type":"Question"/g) ?? []).length, 5);
 });

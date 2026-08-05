@@ -5,8 +5,10 @@ import { metadata as beginnerMetadata } from "../app/beginner-guide/page";
 import { metadata as codesMetadata } from "../app/codes/page";
 import { metadata as coinsMetadata } from "../app/coins-rebirth/page";
 import { metadata as gamepassesMetadata } from "../app/gamepasses/page";
+import { metadata as guidesMetadata } from "../app/guides/page";
 import { metadata as homeMetadata } from "../app/page";
 import { metadata as mapMetadata } from "../app/map/page";
+import { metadata as methodologyMetadata } from "../app/methodology/page";
 import sitemap from "../app/sitemap";
 import { metadata as updatesMetadata } from "../app/updates/page";
 import { metadata as weaponsMetadata } from "../app/weapons/page";
@@ -22,6 +24,11 @@ const pages = [
     route: "/",
     metadata: homeMetadata,
     keyword: "Survive Verity in Area 51 guide",
+  },
+  {
+    route: "/guides/",
+    metadata: guidesMetadata,
+    keyword: "Survive Verity in Area 51 guides",
   },
   {
     route: "/beginner-guide/",
@@ -47,6 +54,11 @@ const pages = [
     route: "/weapons/",
     metadata: weaponsMetadata,
     keyword: "Survive Verity in Area 51 weapon stats",
+  },
+  {
+    route: "/methodology/",
+    metadata: methodologyMetadata,
+    keyword: "Survive Verity in Area 51 guide sources",
   },
   {
     route: "/coins-rebirth/",
@@ -92,6 +104,11 @@ test("sitemap publishes only canonical indexable URLs without guessed modificati
     [
       { url: "http://localhost:3000/", changeFrequency: "daily", priority: 1 },
       {
+        url: "http://localhost:3000/guides/",
+        changeFrequency: "daily",
+        priority: 0.95,
+      },
+      {
         url: "http://localhost:3000/beginner-guide/",
         changeFrequency: "daily",
         priority: 0.95,
@@ -115,6 +132,11 @@ test("sitemap publishes only canonical indexable URLs without guessed modificati
         url: "http://localhost:3000/codes/",
         changeFrequency: "daily",
         priority: 0.8,
+      },
+      {
+        url: "http://localhost:3000/methodology/",
+        changeFrequency: "monthly",
+        priority: 0.6,
       },
     ],
   );

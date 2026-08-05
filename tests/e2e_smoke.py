@@ -15,6 +15,16 @@ PAGES = {
         "Survive Verity in Area 51 Guide: Weapons, Map, Coins & Gamepasses",
         True,
     ),
+    "/guides/": (
+        "Survive Verity in Area 51 Guides: Start Here",
+        "Survive Verity in Area 51 Guides",
+        True,
+    ),
+    "/methodology/": (
+        "How We Verify Survive Verity in Area 51 Guides",
+        "How We Verify This Guide",
+        True,
+    ),
     "/beginner-guide/": (
         "Survive Verity in Area 51 Beginner Guide: First Run",
         "Survive Verity in Area 51 Beginner Guide",
@@ -31,8 +41,8 @@ PAGES = {
         True,
     ),
     "/codes/": (
-        "Survive Verity in Area 51 Codes: Is There a Redeem Button?",
-        "Are There Any Survive Verity in Area 51 Codes?",
+        "Survive Verity in Area 51 Codes: 0 Verified Codes",
+        "Survive Verity in Area 51 Codes",
         True,
     ),
     "/weapons/": (
@@ -50,6 +60,14 @@ PAGES = {
         "Survive Verity in Area 51 Map Lite",
         False,
     ),
+}
+
+REVIEW_PAGES = {
+    "/": "home",
+    "/guides/": "guides",
+    "/methodology/": "methodology",
+    "/beginner-guide/": "beginner-guide",
+    "/codes/": "codes",
 }
 
 
@@ -93,7 +111,18 @@ with sync_playwright() as playwright:
     assert page.locator('a[href^="/gamepasses"]').count() >= 2
     assert page.get_by_text("Official numbers, clearly labeled.").is_visible()
     assert page.get_by_text("Fan-made. Evidence-limited. Never official.").is_visible()
-    page.screenshot(path=str(ARTIFACTS / "home-desktop.png"), full_page=True)
+    assert page.get_by_text("Start here in three steps").is_visible()
+    assert page.get_by_role("heading", name="Latest verified", exact=True).is_visible()
+    navigate(page, "/codes/")
+    assert page.get_by_role("heading", name="Verified code tracker", exact=True).is_visible()
+    assert page.get_by_role("heading", name="Frequently asked questions", exact=True).is_visible()
+    structured_data = "".join(page.locator('script[type="application/ld+json"]').all_text_contents())
+    assert '"@type":"FAQPage"' in structured_data
+    for forbidden_code in ("MOCHIVERITY", "AREA51BACKROOMS", "FALSITYEVENT", "SURVIVOR500"):
+        assert forbidden_code not in page.locator("body").inner_text()
+    for review_path, review_name in REVIEW_PAGES.items():
+        navigate(page, review_path)
+        page.screenshot(path=str(ARTIFACTS / f"{review_name}-desktop.png"), full_page=True)
 
     mobile = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=1)
     mobile.set_default_navigation_timeout(90_000)
@@ -102,16 +131,22 @@ with sync_playwright() as playwright:
     mobile.get_by_role("button", name="Open navigation").click()
     mobile_nav = mobile.get_by_role("navigation", name="Mobile navigation")
     assert mobile_nav.is_visible()
-    mobile_nav.get_by_role("link", name="Gamepasses", exact=True).click()
-    mobile.wait_for_url("**/gamepasses", wait_until="commit", timeout=30_000)
-    assert mobile.locator("h1").inner_text().strip() == "Survive Verity in Area 51 Gamepass Guide"
-    assert mobile.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth")
-    mobile.screenshot(path=str(ARTIFACTS / "gamepasses-mobile.png"), full_page=True)
+    mobile_nav.get_by_role("link", name="Guides", exact=True).click()
+    mobile.wait_for_url("**/guides/", wait_until="commit", timeout=30_000)
+    mobile.locator("h1").wait_for(state="visible", timeout=30_000)
+    assert mobile.locator("h1").inner_text().strip() == "Survive Verity in Area 51 Guides"
+    for review_path, review_name in REVIEW_PAGES.items():
+        navigate(mobile, review_path)
+        assert mobile.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth")
+        mobile.screenshot(path=str(ARTIFACTS / f"{review_name}-mobile.png"), full_page=True)
+    navigate(mobile, "/codes/")
+    assert not mobile.locator("#verified-code-tracker table").is_visible()
+    assert mobile.get_by_role("status", name="No verified codes to list").is_visible()
 
     sitemap = page.request.get(f"{BASE_URL}/sitemap.xml")
     assert sitemap.status == 200
     sitemap_text = sitemap.text()
-    for path in ("/beginner-guide/", "/weapons/", "/gamepasses/", "/updates/", "/codes/"):
+    for path in ("/guides/", "/beginner-guide/", "/weapons/", "/gamepasses/", "/updates/", "/codes/", "/methodology/"):
         assert path in sitemap_text
     for path in ("/coins-rebirth/", "/map/"):
         assert path not in sitemap_text

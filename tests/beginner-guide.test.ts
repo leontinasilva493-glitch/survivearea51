@@ -28,6 +28,24 @@ test("beginner guide turns verified observations into a first-run workflow", () 
   assert.match(html, /href="\/map\/?"/);
   assert.match(html, /href="\/coins-rebirth\/?"/);
   assert.match(html, /Aug 01, 2026/);
+
+  for (const anchor of [
+    "#first-run-route",
+    "#first-purchase",
+    "#ready-checkpoints",
+    "#evidence-boundary",
+  ]) {
+    assert.match(html, new RegExp(`href="${anchor}`));
+  }
+  assert.match(html, /On this page/);
+  assert.equal((html.match(/Ready when/g) ?? []).length, 4);
+  assert.match(html, /You can identify the spawn lobby/);
+  assert.match(html, /You can open the Normal Gun Shop and see the 5K MP7 listing/);
+  assert.match(html, /You can identify the main facility gate before entering combat/);
+  assert.match(
+    html,
+    /You can return to the central combat room as an orientation anchor/,
+  );
 });
 
 test("beginner guide is indexable and discoverable from the site shell", () => {

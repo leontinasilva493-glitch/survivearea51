@@ -34,6 +34,12 @@ export const metadata: Metadata = {
 
 const firstRunPoints = mapPoints.slice(0, 4);
 const mp7 = weaponRecords.find((weapon) => weapon.name === "MP7");
+const readyStandards = [
+  "You can identify the spawn lobby as the staging point.",
+  "You can open the Normal Gun Shop and see the 5K MP7 listing.",
+  "You can identify the main facility gate before entering combat.",
+  "You can return to the central combat room as an orientation anchor.",
+] as const;
 
 export default function BeginnerGuidePage() {
   return (
@@ -55,7 +61,17 @@ export default function BeginnerGuidePage() {
         <span className="mono text-[10px] uppercase tracking-[.1em] text-[var(--cyan)]">INDEXABLE / 4 observed route checkpoints</span>
       </div>
 
-      <section aria-labelledby="first-run-route">
+      <nav aria-label="On this page" className="terminal-panel mb-10 p-5">
+        <p className="eyebrow">On this page</p>
+        <ol className="grid gap-2 p-0 text-sm md:grid-cols-2">
+          <li className="list-none"><a className="text-link" href="#first-run-route">1. First-run route</a></li>
+          <li className="list-none"><a className="text-link" href="#first-purchase">2. First purchase</a></li>
+          <li className="list-none"><a className="text-link" href="#ready-checkpoints">3. Completion checks</a></li>
+          <li className="list-none"><a className="text-link" href="#evidence-boundary">4. Evidence boundaries</a></li>
+        </ol>
+      </nav>
+
+      <section aria-labelledby="first-run-route" className="scroll-mt-28">
         <div className="flex items-center gap-3"><Compass className="h-5 w-5 text-[var(--cyan)]" aria-hidden="true" /><p className="eyebrow !m-0">Start here</p></div>
         <h2 className="section-title mt-5" id="first-run-route">Your first evidence-backed run</h2>
         <p className="mt-4 max-w-3xl text-[var(--muted)]">These checkpoints appear in order in the cited gameplay. They are orientation points, not a claim that the route is fastest or risk-free.</p>
@@ -89,7 +105,28 @@ export default function BeginnerGuidePage() {
         video={communityVideos.independentRun}
       />
 
-      <section className="section-space grid gap-4 lg:grid-cols-[1.05fr_.95fr]" aria-labelledby="first-purchase">
+      <section className="section-space scroll-mt-28" aria-labelledby="ready-checkpoints-title" id="ready-checkpoints">
+        <p className="eyebrow">Stage completion</p>
+        <h2 className="section-title" id="ready-checkpoints-title">Four observable completion checks</h2>
+        <p className="mt-4 max-w-3xl text-[var(--muted)]">
+          Move to the next stage when you can recognize the documented checkpoint yourself.
+          These checks confirm orientation only; they do not certify safety or route speed.
+        </p>
+        <div className="mt-8 grid gap-3 md:grid-cols-2">
+          {firstRunPoints.map((point, index) => (
+            <article className="terminal-panel p-5" key={point.name}>
+              <div className="flex items-center justify-between gap-4">
+                <span className="mono text-[10px] font-bold uppercase tracking-[.12em] text-[var(--cyan)]">Ready when</span>
+                <span className="mono text-[10px] text-[var(--muted)]">0{index + 1}</span>
+              </div>
+              <h3 className="display-font mb-2 mt-6 text-2xl font-bold">{point.name}</h3>
+              <p className="m-0 text-sm text-[var(--muted)]">{readyStandards[index]}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-space scroll-mt-28 grid gap-4 lg:grid-cols-[1.05fr_.95fr]" aria-labelledby="first-purchase">
         <div className="terminal-panel p-6 sm:p-8">
           <Crosshair className="h-6 w-6 text-[var(--cyan)]" aria-hidden="true" />
           <p className="eyebrow mt-8">5K checkpoint</p>
@@ -106,7 +143,7 @@ export default function BeginnerGuidePage() {
         </div>
       </section>
 
-      <section className="section-space" aria-labelledby="evidence-boundary">
+      <section className="section-space scroll-mt-28" aria-labelledby="evidence-boundary">
         <div className="flex items-center gap-3"><ShieldAlert className="h-5 w-5 text-[var(--amber)]" aria-hidden="true" /><p className="eyebrow !m-0">Stop points</p></div>
         <h2 className="section-title mt-5" id="evidence-boundary">Know where the guide stops</h2>
         <div className="mt-7 grid gap-3 md:grid-cols-2">
