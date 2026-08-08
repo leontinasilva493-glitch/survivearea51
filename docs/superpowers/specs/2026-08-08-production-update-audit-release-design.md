@@ -290,4 +290,3 @@ The user owns interactive Cloudflare authorization, selecting the correct accoun
 - Invented Codes, expired-code history, map routes, weapon tiers, rewards, event end times, or patch notes.
 - Re-indexing Map or Coins before their existing evidence gates pass.
 - DNS migration, framework migration, analytics redesign, or unrelated refactoring.
-
