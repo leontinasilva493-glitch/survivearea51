@@ -1,6 +1,16 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+
+import { Dashboard } from "../components/home/Dashboard";
+import { codesAudit } from "../data/codes-audit";
+import {
+  gameSnapshot,
+  gamepassSnapshot,
+  voteSnapshot,
+} from "../data/roblox-snapshot";
 
 const dashboardPath = new URL(
   "../components/home/Dashboard.tsx",
@@ -25,4 +35,65 @@ test("homepage quick MVP tightens repeated section and guide-card rhythm", async
 
   assert.match(dashboard, /min-h-\[205px\]/);
   assert.match(globals, /margin-top: clamp\(3\.5rem, 6vw, 6rem\)/);
+});
+
+test("homepage exposes the approved Start Here and Latest Verified journeys", () => {
+  const html = renderToStaticMarkup(
+    createElement(Dashboard, {
+      dashboard: {
+        game: gameSnapshot,
+        votes: voteSnapshot,
+        gamepasses: gamepassSnapshot,
+        gameSource: "live",
+        voteSource: "live",
+        gamepassSource: "live",
+        sourcesAreLive: true,
+        capturedAt: "2026-08-03T05:00:00.000Z",
+      },
+    }),
+  );
+
+  for (const copy of [
+    "Start here in three steps",
+    "Prepare",
+    "First run",
+    "Go deeper",
+    "Latest verified",
+    "Gamepass Guide",
+    "Update Tracker",
+    "Beginner Guide",
+  ]) {
+    assert.match(html, new RegExp(copy, "i"));
+  }
+  for (const href of ["/guides", "/beginner-guide", "/updates"]) {
+    assert.match(html, new RegExp(`href="${href}/?"`));
+  }
+  assert.equal((html.match(/Latest verified file/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /guaranteed coins|guaranteed safe|best route/i);
+});
+
+test("homepage codes FAQ uses the gameplay audit date instead of the API capture date", () => {
+  const html = renderToStaticMarkup(
+    createElement(Dashboard, {
+      dashboard: {
+        game: gameSnapshot,
+        votes: voteSnapshot,
+        gamepasses: gamepassSnapshot,
+        gameSource: "live",
+        voteSource: "live",
+        gamepassSource: "live",
+        sourcesAreLive: true,
+        capturedAt: "2026-08-03T05:00:00.000Z",
+      },
+    }),
+  );
+
+  assert.match(
+    html,
+    new RegExp(
+      `No working code redemption system or active code has been verified by this guide as of ${codesAudit.verifiedDateLabel}\\.`,
+    ),
+  );
+  assert.doesNotMatch(html, /as of July 30, 2026/);
+  assert.doesNotMatch(html, /as of August 3, 2026/);
 });

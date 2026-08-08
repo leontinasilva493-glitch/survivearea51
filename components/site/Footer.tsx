@@ -4,13 +4,15 @@ import Link from "next/link";
 import { ROBLOX_GAME_URL } from "@/lib/roblox";
 
 const links = [
+  ["All guides", "/guides/"],
   ["Beginner guide", "/beginner-guide/"],
+  ["Weapons", "/weapons/"],
   ["Gamepasses", "/gamepasses/"],
   ["Updates", "/updates/"],
   ["Codes", "/codes/"],
-  ["Weapons", "/weapons/"],
   ["Coins & Rebirth", "/coins-rebirth/"],
   ["Map", "/map/"],
+  ["Evidence policy", "/methodology/"],
 ] as const;
 
 export function Footer() {

@@ -21,12 +21,35 @@ import {
   VerificationStatus,
 } from "@/components/site/TrustUI";
 import { siteConfig } from "@/config/site";
+import { codesAudit } from "@/data/codes-audit";
+import { getLatestVerifiedGuides } from "@/data/guide-directory";
 import {
   ROBLOX_GAME_URL,
   ratingPercent,
   type RobloxDashboardData,
 } from "@/lib/roblox";
 import { readUpdateSignal } from "@/lib/update-signal";
+
+const startHereSteps = [
+  {
+    step: "01",
+    title: "Prepare",
+    copy: "Check the current official title signal and whether any code interface has been verified.",
+    href: "/updates/",
+  },
+  {
+    step: "02",
+    title: "First run",
+    copy: "Follow four observed checkpoints from spawn to the first documented combat loop.",
+    href: "/beginner-guide/",
+  },
+  {
+    step: "03",
+    title: "Go deeper",
+    copy: "Choose a weapons, economy, map, updates, or codes path with its evidence boundary visible.",
+    href: "/guides/",
+  },
+] as const;
 
 const guideCards = [
   { title: "Start Your First Run", copy: "Follow four observed checkpoints from spawn to the first documented combat loop.", href: "/beginner-guide/", code: "RUN-00", icon: Compass },
@@ -45,7 +68,7 @@ const baseFaq = [
   },
   {
     question: "Are there working codes?",
-    answer: "No working code redemption system or active code has been verified by this guide as of July 30, 2026. This is a desk-review status, not a claim that a future update cannot add one.",
+    answer: `No working code redemption system or active code has been verified by this guide as of ${codesAudit.verifiedDateLabel}. This is a dated gameplay audit, not a claim that a future update cannot add one.`,
   },
   {
     question: "What is the best weapon?",
@@ -82,6 +105,7 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
   const sortedPasses = [...dashboard.gamepasses].filter((pass) => pass.price !== null).sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
   const mostExpensive = sortedPasses.at(-1);
   const coinPass = dashboard.gamepasses.find((pass) => pass.name.toLowerCase().includes("coin"));
+  const latestVerified = getLatestVerifiedGuides(dashboard.capturedAt, 3);
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -141,6 +165,33 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
         </div>
       </section>
 
+      <section className="section-space" aria-labelledby="start-here-heading">
+        <p className="eyebrow">Mission sequence</p>
+        <h2 className="section-title" id="start-here-heading">Start here in three steps</h2>
+        <p className="mt-4 max-w-3xl text-[var(--muted)]">
+          Check the current game signal, complete the observed first-run checkpoints, then
+          choose the deeper field file that matches your question.
+        </p>
+        <div className="mt-8 grid gap-3 lg:grid-cols-3">
+          {startHereSteps.map((item) => (
+            <Link
+              className="terminal-panel group grid min-h-[190px] grid-rows-[auto_1fr_auto] p-6 no-underline hover:-translate-y-1"
+              href={item.href}
+              key={item.step}
+            >
+              <span className="mono text-xs font-bold text-[var(--cyan)]">{item.step}</span>
+              <div className="mt-7">
+                <h3 className="display-font m-0 text-3xl font-bold group-hover:text-[var(--cyan)]">{item.title}</h3>
+                <p className="mb-0 mt-3 text-sm text-[var(--muted)]">{item.copy}</p>
+              </div>
+              <span className="mono mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.1em] text-[var(--cyan)]">
+                Open next file <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="section-space" aria-labelledby="status-heading">
         <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div><p className="eyebrow">Current game status</p><h2 className="section-title" id="status-heading">One universe. One current signal.</h2></div>
@@ -175,9 +226,39 @@ export function Dashboard({ dashboard }: { dashboard: RobloxDashboardData }) {
         </div>
       </section>
 
+      <section className="section-space" aria-labelledby="latest-verified-heading">
+        <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="eyebrow">Fresh evidence</p>
+            <h2 className="section-title" id="latest-verified-heading">Latest verified</h2>
+          </div>
+          <Link className="text-link" href="/guides/">
+            Browse all guides <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="grid gap-3 lg:grid-cols-3">
+          {latestVerified.map((entry) => (
+            <Link className="terminal-panel group block p-6 no-underline" href={entry.href} key={entry.href}>
+              <p className="mono m-0 text-[9px] font-bold uppercase tracking-[.12em] text-[var(--muted)]">Latest verified file</p>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <VerificationStatus status={entry.status} />
+                <LastVerified date={entry.verifiedAt} />
+              </div>
+              <h3 className="display-font mb-2 mt-7 text-2xl font-bold group-hover:text-[var(--cyan)]">{entry.title}</h3>
+              <p className="m-0 text-sm text-[var(--muted)]">{entry.summary}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="section-space" aria-labelledby="guides-heading">
         <p className="eyebrow">Find what you need</p>
-        <h2 className="section-title" id="guides-heading">Choose a field file.</h2>
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <h2 className="section-title" id="guides-heading">Choose a field file.</h2>
+          <Link className="text-link" href="/guides/">
+            Open the guide directory <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
         <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {guideCards.map(({ title, copy, href, code, icon: Icon }) => (
             <Link className="terminal-panel group min-h-[205px] p-6 no-underline transition-transform hover:-translate-y-1" href={href} key={href}>
