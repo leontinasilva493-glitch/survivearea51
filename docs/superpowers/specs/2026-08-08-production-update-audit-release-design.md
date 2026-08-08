@@ -230,23 +230,31 @@ Then verify the Worker URL and custom domain again. Git history remains append-o
 
 ### Mandatory before Release A
 
-1. Open PowerShell.
-2. Paste:
+The normal Wrangler login command must not be used here because Windows opens OAuth in the default browser profile, which may hold the wrong Google/Cloudflare session. OAuth URLs are bound to the currently waiting CLI session and must not be reused after an earlier browser has consumed or invalidated the state.
+
+1. Open the Chrome profile that is already signed in to the Google/Cloudflare user that owns `survivearea51.site`.
+2. In that profile, open `https://dash.cloudflare.com/` and confirm that the expected account is visible. Leave this browser window open.
+3. Open a new PowerShell window.
+4. Paste:
 
 ```powershell
 $ProjectPath = 'D:\1副业\AI产品\AI网站\8月\游戏-Survive Verity in Area 51\游戏站脚手架-main'
 Set-Location -LiteralPath $ProjectPath
-& '.\node_modules\.bin\wrangler.cmd' login
+& '.\node_modules\.bin\wrangler.cmd' login --browser=false --use-keyring
 ```
 
-3. A browser authorization page should open. Log in to the Cloudflare account that owns `survivearea51.site`, then click Allow/Authorize.
-4. Return to PowerShell and run:
+5. Keep PowerShell open. Wrangler prints one fresh OAuth URL and waits for its local callback.
+6. Copy that newly printed URL directly into the already-open correct Chrome profile. Do not open it first in another browser, do not reuse a URL from an earlier attempt, and do not stop the waiting PowerShell command.
+7. Click Allow/Authorize. The browser should redirect to the local callback and PowerShell should report a successful login.
+8. Return to PowerShell and run:
 
 ```powershell
 & '.\node_modules\.bin\wrangler.cmd' whoami
 ```
 
-5. The result should list an authenticated Cloudflare account. Do not send API tokens, cookies, or secret values. Reply only `Cloudflare 登录完成` and, if several accounts are listed, tell the agent which account owns the site.
+9. The result should list an authenticated Cloudflare account. Do not send API tokens, cookies, or secret values. Reply only `Cloudflare 登录完成` and, if several accounts are listed, tell the agent which account owns the site.
+
+If the link reports invalid or expired state, press `Ctrl+C` once in the waiting PowerShell window, rerun the `login --browser=false --use-keyring` command, and use only the newly generated URL. Never retry an old OAuth URL.
 
 ### Visual review after Release A
 
